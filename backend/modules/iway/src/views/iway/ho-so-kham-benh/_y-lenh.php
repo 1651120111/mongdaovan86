@@ -2294,7 +2294,7 @@
         <h4 class="text-primary">13. Chỉ định đặc biệt</h4>
     </div>
     <div class="row mb-10 mx-0">
-        <textarea class="form-control setInputTextYcommand h-300" name="special_instructions"></textarea>
+        <textarea class="form-control setInputTextYcomman" name="special_instructions" rows="5"></textarea>
     </div>
 
 </form>
