@@ -2,6 +2,9 @@
 
 namespace backend\widgets;
 
+
+use backend\assets\ToastWidgetAsset;
+
 class ToastrWidget extends \yii\base\Widget
 {
     public $key;
@@ -16,6 +19,10 @@ class ToastrWidget extends \yii\base\Widget
         if ($this->key == null || !\Yii::$app->session->hasFlash($this->key)) return null;
         $data = json_encode(\Yii::$app->session->getFlash($this->key));
         if ($data == null) return null;
+
+        $view = $this->getView();
+        ToastWidgetAsset::register($view);
+
         return $this->render('toastrWidget', [
             'data' => $data
         ]);
