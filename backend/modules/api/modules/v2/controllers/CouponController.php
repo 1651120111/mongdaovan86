@@ -5,7 +5,7 @@ namespace backend\modules\api\modules\v2\controllers;
 use modava\affiliate\models\Customer;
 use modava\affiliate\models\Payment;
 use modava\affiliate\models\search\OrderSearch;
-use modava\iway\models\search\CustomerSearch;
+use modava\affiliate\models\search\CustomerSearch;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
 use modava\affiliate\models\Order;
@@ -388,7 +388,7 @@ class CouponController extends RestfullController
 
     public function actionCustomers() {
         $model = new CustomerSearch();
-        $dataProvider = $model->search(Yii::$app->request->get());
+        $dataProvider = $model->search(Yii::$app->request->get(), true);
 
         return [
             'success' => true,
