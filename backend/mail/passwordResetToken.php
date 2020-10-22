@@ -8,6 +8,7 @@ use yii\helpers\Html;
 
 $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['/auth/reset-password', 'token' => $token]);
 $login = Yii::$app->urlManager->createAbsoluteUrl(['/auth/login.html']);
+$domain = str_replace(['http://', 'https://'], '', FRONTEND_HOST_INFO);
 ?>
 <div class="mj-container" style="background-color:#eceff4;"><!--[if mso | IE]>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="700" align="center"
@@ -69,7 +70,7 @@ $login = Yii::$app->urlManager->createAbsoluteUrl(['/auth/login.html']);
                                     <div style="cursor:auto;color:#000000;font-family:Proxima Nova, Arial, Arial, Helvetica, sans-serif;font-size:15px;line-height:22px;text-align:left;">
                                         Bạn hoặc ai đó vừa yêu cầu lấy lại mật khẩu mới cho tài khoản
                                         <b><?php echo Html::encode($user->email) ?></b> trên
-                                        <i><?= str_replace(['http://', 'https://'], '', FRONTEND_HOST_INFO) ?></i>
+                                        <i><?= $domain ?></i>
                                         <br><br>
                                         Nếu không muốn đổi mật khẩu, bạn hãy bỏ qua email này.
                                         <br><br>
@@ -80,7 +81,7 @@ $login = Yii::$app->urlManager->createAbsoluteUrl(['/auth/login.html']);
                                         Link này chỉ có giá trị trong vòng 24 giờ.
                                         <br>
                                         Cảm ơn bạn đã sử dụng dịch vụ
-                                        của <?php echo Html::a('365dep.vn', '365dep.vn') ?>.
+                                        của <?php echo Html::a($domain, FRONTEND_HOST_INFO) ?>.
                                     </div>
                                 </td>
                             </tr>
