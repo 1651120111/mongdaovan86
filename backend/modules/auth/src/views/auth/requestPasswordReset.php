@@ -31,6 +31,7 @@ $this->registerCss($css);
                                     'options' => [
                                         'class' => "form-horizontal",
                                         'novalidate' => true,
+                                        'redirect-on-submit' => Url::toRoute(['/auth/login']),
                                     ]
                                 ]); ?>
                                 <form>
@@ -89,7 +90,7 @@ $('body').on('submit', 'form#request-password-reset-form', function (e) {
             grecaptcha.reset();
             var redirect_on_submit = $('#request-password-reset-form').attr('redirect-on-submit') || window.location.href;
             setTimeout(function () {
-                window.location.href = redirect_on_submit;
+                // window.location.href = redirect_on_submit;
             }, 2000);
         } else {
             grecaptcha.reset();

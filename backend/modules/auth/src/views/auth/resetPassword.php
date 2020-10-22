@@ -9,6 +9,7 @@ $css = <<< CSS
 .hk-pg-wrapper.hk-auth-wrapper .auth-form-wrap .auth-form{padding: 25px;background-color: #fff;border-radius: .25rem;}
 CSS;
 $this->registerCss($css);
+
 ?>
 <div class="hk-wrapper">
 
@@ -28,20 +29,26 @@ $this->registerCss($css);
                             <?php $form = ActiveForm::begin(['id' => 'reset-password-form', 'options' => ['class' => 'form-horizontal form-simple', 'novalidate' => true]]); ?>
                             <h1 class="display-5 mb-30 text-center"><?= Yii::t('backend', 'Please reset your password'); ?></h1>
                             <div class="form-group">
-                                <input class="form-control"
-                                       placeholder="<?= Yii::t('backend', 'New password'); ?>"
-                                       type="password">
+                                <?php echo $form->field($model, 'password')
+                                    ->passwordInput(['class' => 'form-control', 'placeholder' => 'Mật khẩu', 'required' => ''])
+                                    ->label(false) ?>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control"
-                                           placeholder="<?= Yii::t('backend', 'Re-enter new password'); ?>"
-                                           type="password">
+                                    <?php echo $form->field($model, 'confirm_password')
+                                        ->passwordInput(['class' => 'form-control', 'placeholder' => 'Xác nhận mật khẩu', 'required' => ''])
+                                        ->label(false) ?>
                                     <div class="input-group-append">
                                             <span class="input-group-text"><span class="feather-icon"><i
                                                             data-feather="eye-off"></i></span></span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="position-relative text-center">
+                                <?= $form->field($model, 'reCaptcha')->widget(
+                                    \himiklab\yii2\recaptcha\ReCaptcha2::class,
+                                    ['siteKey' => RECAPTCHA_GOOGLE_SITEKEY]
+                                )->label(false) ?>
                             </div>
                             <?php echo Html::submitButton('<i class="ft-unlock"></i> ' . Yii::t('backend', \Yii::t('backend', 'Reset password')), [
                                 'class' => 'btn btn-success btn-block mb-20',
