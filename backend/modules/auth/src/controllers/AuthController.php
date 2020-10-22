@@ -13,6 +13,7 @@ use Yii;
 use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Response;
 
 
@@ -114,7 +115,7 @@ class AuthController extends MyAuthController
                 return ['code' => 400,];
             }
 
-//            Email::sendEmail($model->email);
+            Email::sendEmail($model->email);
 
             Yii::$app->session->setFlash('toastr-request-password-reset', [
                 'text' => 'Thành công. Vui lòng kiểm tra email và làm theo hướng dẫn.',

@@ -69,7 +69,7 @@ $login = Yii::$app->urlManager->createAbsoluteUrl(['/auth/login.html']);
                                     <div style="cursor:auto;color:#000000;font-family:Proxima Nova, Arial, Arial, Helvetica, sans-serif;font-size:15px;line-height:22px;text-align:left;">
                                         Bạn hoặc ai đó vừa yêu cầu lấy lại mật khẩu mới cho tài khoản
                                         <b><?php echo Html::encode($user->email) ?></b> trên
-                                        <i>365dep.vn</i>
+                                        <i><?= str_replace(['http://', 'https://'], '', FRONTEND_HOST_INFO) ?></i>
                                         <br><br>
                                         Nếu không muốn đổi mật khẩu, bạn hãy bỏ qua email này.
                                         <br><br>
