@@ -1,5 +1,8 @@
 <?php
 
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 $this->title = Yii::t('backend', 'Reset password');
 $css = <<< CSS
 .brand-img{max-height: 120px;}
@@ -22,29 +25,32 @@ $this->registerCss($css);
                                      src="<?= Yii::$app->getAssetManager()->publish('@authweb/dist/img/site-logo.png')[1]; ?>"
                                      alt="brand"/>
                             </a>
-                            <form>
-                                <h1 class="display-5 mb-30 text-center"><?= Yii::t('backend', 'Please reset your password'); ?></h1>
-                                <div class="form-group">
+                            <?php $form = ActiveForm::begin(['id' => 'reset-password-form', 'options' => ['class' => 'form-horizontal form-simple', 'novalidate' => true]]); ?>
+                            <h1 class="display-5 mb-30 text-center"><?= Yii::t('backend', 'Please reset your password'); ?></h1>
+                            <div class="form-group">
+                                <input class="form-control"
+                                       placeholder="<?= Yii::t('backend', 'New password'); ?>"
+                                       type="password">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
                                     <input class="form-control"
-                                           placeholder="<?= Yii::t('backend', 'New password'); ?>"
+                                           placeholder="<?= Yii::t('backend', 'Re-enter new password'); ?>"
                                            type="password">
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input class="form-control"
-                                               placeholder="<?= Yii::t('backend', 'Re-enter new password'); ?>"
-                                               type="password">
-                                        <div class="input-group-append">
+                                    <div class="input-group-append">
                                             <span class="input-group-text"><span class="feather-icon"><i
                                                             data-feather="eye-off"></i></span></span>
-                                        </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-block mb-20"
-                                        type="submit"><?= Yii::t('backend', 'Reset password'); ?></button>
-                                <p class="text-right"><a
-                                            href="#"><?= Yii::t('backend', 'Back to login'); ?></a></p>
-                            </form>
+                            </div>
+                            <?php echo Html::submitButton('<i class="ft-unlock"></i> ' . Yii::t('backend', \Yii::t('backend', 'Reset password')), [
+                                'class' => 'btn btn-success btn-block mb-20',
+                                'name' => 'login-button'
+                            ]) ?>
+
+                            <p class="text-right"><a
+                                        href="#"><?= Yii::t('backend', 'Back to login'); ?></a></p>
+                            <?php ActiveForm::end(); ?>
                         </div>
                     </div>
                 </div>
