@@ -35,6 +35,8 @@ return [
     'video-category-size' => '150x150px',
     'project-size' => '150x150px',
     'project-image-size' => '150x150px',
+    'user-avatar' => '180x180px',
+    'user-cover' => '1118x150px',
     'status' => [
         '0' => Yii::t('backend', 'Tạm ngưng'),
         '1' => Yii::t('backend', 'Hiển thị'),

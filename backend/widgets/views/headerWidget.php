@@ -162,9 +162,10 @@ use yii\helpers\Url;
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                <a class="dropdown-item" href="<?= Url::toRoute(['/auth/user/view', 'id' => Yii::$app->user->id]) ?>"><i class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
-                <a class="dropdown-item" href="#"><i
-                            class="dropdown-icon zmdi zmdi-card"></i><span>My balance</span></a>
+                <a class="dropdown-item" href="<?= Url::toRoute(['/auth/auth/profile']) ?>">
+                    <i class="dropdown-icon zmdi zmdi-account"></i><span>Thông tin cá nhân</span></a>
+                <a class="dropdown-item" href="<?= Url::toRoute(['/auth/auth/change-password']) ?>"><i
+                            class="dropdown-icon zmdi zmdi-card"></i><span>Thay đổi mật khẩu</span></a>
                 <a class="dropdown-item" href="inbox.html"><i
                             class="dropdown-icon zmdi zmdi-email"></i><span>Inbox</span></a>
                 <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-settings"></i><span>Settings</span></a>

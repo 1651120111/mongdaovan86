@@ -11,9 +11,9 @@ class UserProfile extends ActiveRecord
     const SCENARIO_SAVE = 'save';
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 2;
-    const GENDER_OTHER = 3;
+//    const GENDER_OTHER = 3;
     const GENDER = [
-        self::GENDER_OTHER => 'Khác',
+//        self::GENDER_OTHER => 'Khác',
         self::GENDER_MALE => 'Nam',
         self::GENDER_FEMALE => 'Nữ'
     ];
@@ -36,7 +36,7 @@ class UserProfile extends ActiveRecord
             [['user_id'], 'required', 'on' => self::SCENARIO_SAVE],
             [['phone'], 'required'],
             [['user_id', 'gender'], 'integer'],
-            [['gender'], 'in', 'range' => self::GENDER],
+            [['gender'], 'in', 'range' => [1,2]],
             [['fullname', 'address', 'avatar', 'cover'], 'string', 'max' => 255],
             [['facebook'], 'string', 'max' => 50],
             [['birthday', 'phone'], 'string', 'max' => 25],

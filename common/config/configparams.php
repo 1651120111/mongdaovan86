@@ -133,5 +133,20 @@ return [
         'path' => [
             'folder' => '/uploads/iway-tray-image/'
         ]
+    ],
+    'user-avatar' => [
+        '180x180' => [
+            'folder' => '/uploads/user/180x180/',
+            'width' => 180,
+            'height' => 180
+        ],
+
+    ],
+    'user-cover' => [
+        'path' => [
+            'folder' => '/uploads/user/',
+            'width' => 1118,
+            'height' => 150
+        ]
     ]
 ];
