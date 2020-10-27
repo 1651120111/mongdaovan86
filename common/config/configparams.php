@@ -135,12 +135,16 @@ return [
         ]
     ],
     'user-avatar' => [
+        '40x40' => [
+            'folder' => '/uploads/user/40x40/',
+            'width' => 40,
+            'height' => 40
+        ],
         '180x180' => [
             'folder' => '/uploads/user/180x180/',
             'width' => 180,
             'height' => 180
         ],
-
     ],
     'user-cover' => [
         'path' => [

@@ -9,12 +9,16 @@
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
+/* @var $model modava\auth\models\UserProfile */
+
 $this->title = 'Thông tin người dùng - Cập nhật';
 $this->params['breadcrumbs'][] = $this->title;
 
 $role = array_key_exists($roleUser, $roleName) ? $roleName[$roleUser]->description : '';
-$cover = $model->cover != '' ? $model->cover : Yii::$app->assetManager->publish('@modava-assets/dist/img/trans-bg.jpg')[1];
-$avatar = $model->avatar != '' ? $model->avatar : Yii::$app->assetManager->publish('@modava-assets/dist/img/avatar12.jpg')[1];
+$avatar = $model->getAvatar('180x180');
+if ($avatar == null) $avatar = Yii::$app->assetManager->publish('@modava-assets/dist/img/avatar12.jpg')[1];
+$cover = $model->getCover();
+if ($cover == null) $cover = Yii::$app->assetManager->publish('@modava-assets/dist/img/trans-bg.jpg')[1];
 
 $formInputTemp = '<div class="row">{label}<div class="col-9">{input}</div></div>';
 $labelOptions = ['class' => 'col-3 control-label'];
@@ -64,7 +68,7 @@ $labelOptions = ['class' => 'col-3 control-label'];
         <div class="col-xl-8">
             <div class="card card-profile-feed">
                 <div class="card-header card-header-action">
-                    <h4><i class="icon-user"></i> </h4>
+                    <h4><i class="icon-user"></i></h4>
                 </div>
                 <div class="card-body">
                     <?php $form = ActiveForm::begin(['id' => 'form-update-profile']) ?>
@@ -148,7 +152,15 @@ $labelOptions = ['class' => 'col-3 control-label'];
                                 <div class="row">
                                     <label class="col-3 control-label">Avatar:</label>
                                     <div class="col-9">
-
+                                        <?= $form->field($model, 'iptAvatar')->fileInput([
+                                            'onchange' => 'readURL(this, $(".preview-avatar"), $(this).attr("data-default"))',
+                                            'data-default' => $avatar
+                                        ])->label(false) ?>
+                                        <div class="preview-avatar"
+                                             style="display: <?= $avatar != null ? 'block' : 'none' ?>">
+                                            <img style="max-width: 180px; max-height: 180px;" src="<?= $avatar ?>"
+                                                 alt="Preview">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +170,15 @@ $labelOptions = ['class' => 'col-3 control-label'];
                                 <div class="row">
                                     <label class="col-3 control-label">Cover:</label>
                                     <div class="col-9">
-
+                                        <?= $form->field($model, 'iptCover')->fileInput([
+                                            'onchange' => 'readURL(this, $(".preview-avatar"), $(this).attr("data-default"))',
+                                            'data-default' => $cover
+                                        ])->label(false) ?>
+                                        <div class="preview-avatar"
+                                             style="display: <?= $cover != null ? 'block' : 'none' ?>">
+                                            <img style="max-width: 100%;" src="<?= $cover ?>"
+                                                 alt="Preview">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
