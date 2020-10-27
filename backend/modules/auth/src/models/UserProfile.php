@@ -66,7 +66,7 @@ class UserProfile extends ActiveRecord
             'avatar' => Yii::t('backend', 'Avatar'),
             'cover' => Yii::t('backend', 'Cover'),
             'locale' => Yii::t('backend', 'Locale'),
-            'gender' => Yii::t('backend', 'Gender'),
+            'gender' => Yii::t('backend', 'Giới tính'),
         ];
     }
 

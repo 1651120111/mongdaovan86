@@ -62,7 +62,7 @@ $avatar = $userInfo->avatar != '' ? $userInfo->avatar : Yii::$app->assetManager-
         <div class="col-xl-8">
             <div class="card card-profile-feed">
                 <div class="card-header card-header-action">
-                    <h4><i class="icon-user"></i> ABOUT</h4>
+                    <h4><i class="icon-user"></i> </h4>
                 </div>
                 <div class="card-body">
                     <?php $form = ActiveForm::begin(['id' => 'form-change-pass']); ?>

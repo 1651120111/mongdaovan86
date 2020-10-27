@@ -9,10 +9,15 @@
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
+$this->title = 'Thông tin người dùng - Cập nhật';
+$this->params['breadcrumbs'][] = $this->title;
+
 $role = array_key_exists($roleUser, $roleName) ? $roleName[$roleUser]->description : '';
 $cover = $model->cover != '' ? $model->cover : Yii::$app->assetManager->publish('@modava-assets/dist/img/trans-bg.jpg')[1];
 $avatar = $model->avatar != '' ? $model->avatar : Yii::$app->assetManager->publish('@modava-assets/dist/img/avatar12.jpg')[1];
 
+$formInputTemp = '<div class="row">{label}<div class="col-9">{input}</div></div>';
+$labelOptions = ['class' => 'col-3 control-label'];
 
 ?>
 <?= \backend\widgets\ToastrWidget::widget(['key' => 'toastr-update-profile']) ?>
@@ -59,22 +64,18 @@ $avatar = $model->avatar != '' ? $model->avatar : Yii::$app->assetManager->publi
         <div class="col-xl-8">
             <div class="card card-profile-feed">
                 <div class="card-header card-header-action">
-                    <h4><i class="icon-user"></i> ABOUT</h4>
+                    <h4><i class="icon-user"></i> </h4>
                 </div>
                 <div class="card-body">
                     <?php $form = ActiveForm::begin(['id' => 'form-update-profile']) ?>
                     <div class="row">
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-3 control-label">Họ & Tên:</label>
-                                    <div class="col-9">
-                                        <?= $form->field($model, 'fullname', [
-                                            'options' => ['tag' => false]
-                                        ])->textInput(['class' => 'form-control'])->label(false) ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?= $form->field($model, 'fullname', [
+                                'template' => $formInputTemp,
+                                'labelOptions' => $labelOptions,
+                            ])
+                                ->textInput(['class' => 'form-control'])
+                                ->label($model->getAttributeLabel('fullname') . ':') ?>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
@@ -88,83 +89,59 @@ $avatar = $model->avatar != '' ? $model->avatar : Yii::$app->assetManager->publi
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-3 control-label">Địa chỉ:</label>
-                                    <div class="col-9">
-                                        <?= $form->field($model, 'address', [
-                                            'options' => ['tag' => false]
-                                        ])->textInput(['class' => 'form-control'])->label(false) ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?= $form->field($model, 'address', [
+                                'template' => $formInputTemp,
+                                'labelOptions' => $labelOptions,
+                            ])
+                                ->textInput(['class' => 'form-control'])
+                                ->label($model->getAttributeLabel('address') . ':') ?>
                         </div>
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-3 control-label">Ngày sinh:</label>
-                                    <div class="col-9">
-                                        <?= $form->field($model, 'birthday', [
-                                            'options' => ['tag' => false]
-                                        ])->widget(
-                                            \dosamigos\datepicker\DatePicker::class,
-                                            [
-                                                'template' => '{input}<div class="input-group-append">{addon}</div>',
-                                                'clientOptions' => [
-                                                    'autoclose' => true,
-                                                    'format' => 'dd/mm/yyyy',
-                                                ]
-                                            ]
-                                        )->label(false); ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?= $form->field($model, 'birthday', [
+                                'template' => $formInputTemp,
+                                'labelOptions' => $labelOptions,
+                            ])->widget(
+                                \dosamigos\datepicker\DatePicker::class,
+                                [
+                                    'template' => '{input}<div class="input-group-append">{addon}</div>',
+                                    'clientOptions' => [
+                                        'autoclose' => true,
+                                        'format' => 'dd/mm/yyyy',
+                                    ]
+                                ]
+                            )->label($model->getAttributeLabel('birthday') . ':'); ?>
                         </div>
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-3 control-label">Giới tính:</label>
-                                    <div class="col-9">
-                                        <?= $form->field($model, 'gender')->radioList(\modava\auth\models\UserProfile::GENDER)->label(false) ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?= $form->field($model, 'gender', [
+                                'template' => $formInputTemp,
+                                'labelOptions' => $labelOptions,
+                            ])
+                                ->radioList(\modava\auth\models\UserProfile::GENDER)
+                                ->label($model->getAttributeLabel('gender') . ':') ?>
                         </div>
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-3 control-label">Số điện thoại:</label>
-                                    <div class="col-9">
-                                        <?= $form->field($model, 'phone', [
-                                            'options' => ['tag' => false]
-                                        ])->textInput(['class' => 'form-control'])->label(false); ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?= $form->field($model, 'phone', [
+                                'template' => $formInputTemp,
+                                'labelOptions' => $labelOptions,
+                            ])
+                                ->textInput(['class' => 'form-control'])
+                                ->label($model->getAttributeLabel('phone') . ':') ?>
                         </div>
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-3 control-label">Facebook:</label>
-                                    <div class="col-9">
-                                        <?= $form->field($model, 'facebook', [
-                                            'options' => ['tag' => false]
-                                        ])->textInput(['class' => 'form-control'])->label(false); ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?= $form->field($model, 'facebook', [
+                                'template' => $formInputTemp,
+                                'labelOptions' => $labelOptions,
+                            ])
+                                ->textInput(['class' => 'form-control'])
+                                ->label($model->getAttributeLabel('facebook') . ':') ?>
                         </div>
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-3 control-label">Ghi chú:</label>
-                                    <div class="col-9">
-                                        <?= $form->field($model, 'about', [
-                                            'options' => ['tag' => false]
-                                        ])->textarea(['class' => 'form-control', 'rows' => 4])->label(false); ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?= $form->field($model, 'about', [
+                                'template' => $formInputTemp,
+                                'labelOptions' => $labelOptions,
+                            ])
+                                ->textarea(['class' => 'form-control', 'rows' => 4])
+                                ->label($model->getAttributeLabel('about') . ':') ?>
                         </div>
                         <div class="col-12">
                             <div class="form-group">

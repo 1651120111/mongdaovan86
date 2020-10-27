@@ -59,7 +59,7 @@ $avatar = $model->avatar != '' ? $model->avatar : Yii::$app->assetManager->publi
         <div class="col-xl-8">
             <div class="card card-profile-feed">
                 <div class="card-header card-header-action">
-                    <h4><i class="icon-user"></i> ABOUT</h4>
+                    <h4><i class="icon-user"></i></h4>
                     <a href="<?= Url::toRoute(['/auth/auth/update-profile']) ?>" class="btn btn-xs btn-warning"><i class="icon-note"></i> Edit</a>
                 </div>
                 <div class="card-body">

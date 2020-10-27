@@ -165,23 +165,23 @@ use yii\helpers\Url;
                 <a class="dropdown-item" href="<?= Url::toRoute(['/auth/auth/profile']) ?>">
                     <i class="dropdown-icon zmdi zmdi-account"></i><span>Thông tin cá nhân</span></a>
                 <a class="dropdown-item" href="<?= Url::toRoute(['/auth/auth/change-password']) ?>"><i
-                            class="dropdown-icon zmdi zmdi-card"></i><span>Thay đổi mật khẩu</span></a>
-                <a class="dropdown-item" href="inbox.html"><i
-                            class="dropdown-icon zmdi zmdi-email"></i><span>Inbox</span></a>
-                <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-settings"></i><span>Settings</span></a>
-                <div class="dropdown-divider"></div>
-                <div class="sub-dropdown-menu show-on-hover">
-                    <a href="#" class="dropdown-toggle dropdown-item no-caret"><i
-                                class="zmdi zmdi-check text-success"></i>Online</a>
-                    <div class="dropdown-menu open-left-side">
-                        <a class="dropdown-item" href="#"><i
-                                    class="dropdown-icon zmdi zmdi-check text-success"></i><span>Online</span></a>
-                        <a class="dropdown-item" href="#"><i
-                                    class="dropdown-icon zmdi zmdi-circle-o text-warning"></i><span>Busy</span></a>
-                        <a class="dropdown-item" href="#"><i
-                                    class="dropdown-icon zmdi zmdi-minus-circle-outline text-danger"></i><span>Offline</span></a>
-                    </div>
-                </div>
+                            class="dropdown-icon zmdi zmdi-lock-outline"></i><span>Thay đổi mật khẩu</span></a>
+<!--                <a class="dropdown-item" href="inbox.html"><i-->
+<!--                            class="dropdown-icon zmdi zmdi-email"></i><span>Inbox</span></a>-->
+<!--                <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-settings"></i><span>Settings</span></a>-->
+<!--                <div class="dropdown-divider"></div>-->
+<!--                <div class="sub-dropdown-menu show-on-hover">-->
+<!--                    <a href="#" class="dropdown-toggle dropdown-item no-caret"><i-->
+<!--                                class="zmdi zmdi-check text-success"></i>Online</a>-->
+<!--                    <div class="dropdown-menu open-left-side">-->
+<!--                        <a class="dropdown-item" href="#"><i-->
+<!--                                    class="dropdown-icon zmdi zmdi-check text-success"></i><span>Online</span></a>-->
+<!--                        <a class="dropdown-item" href="#"><i-->
+<!--                                    class="dropdown-icon zmdi zmdi-circle-o text-warning"></i><span>Busy</span></a>-->
+<!--                        <a class="dropdown-item" href="#"><i-->
+<!--                                    class="dropdown-icon zmdi zmdi-minus-circle-outline text-danger"></i><span>Offline</span></a>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="dropdown-divider"></div>
                 <?= Html::a('<i class="dropdown-icon zmdi zmdi-power"></i> ' . Yii::t('backend', 'Logout'), Url::toRoute(['/auth/logout.html']), ['class' => 'dropdown-item', 'data-method ' => 'POST']); ?>
             </div>
