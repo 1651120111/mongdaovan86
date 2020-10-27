@@ -67,6 +67,7 @@ phpunit.phar
 
 !/backend/web/uploads/user/
 /backend/web/uploads/user/*
+!/backend/web/uploads/user/index.html
 
 !/frontend/runtime/
 /frontend/runtime/*
@@ -80,6 +81,7 @@ phpunit.phar
 /frontend/web/uploads/*
 !/frontend/web/uploads/tmp/
 /frontend/web/uploads/tmp/*
+!/frontend/web/uploads/tmp/index.html
 
 !/frontend/web/uploads/project/
 /frontend/web/uploads/project/*
