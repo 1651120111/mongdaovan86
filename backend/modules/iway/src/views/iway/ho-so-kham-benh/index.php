@@ -28,9 +28,13 @@
         <a class="nav-link" id="tab-line-5" data-toggle="tab" href="#tab-5" role="tab"
            aria-controls="tab-5" aria-selected="false"><i class="icon-film mr-2"></i>File STL</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tab-line-6" data-toggle="tab" href="#tab-6" role="tab"
+           aria-controls="tab-6" aria-selected="false"><i class="icon-film mr-2"></i>Dental Form</a>
+    </li>
 </ul>
 <div class="tab-content">
-    <div class="tab-pane fade active show" id="tab-1" role="tabpanel" aria-labelledby="tab-line-1">
+    <div class="tab-pane fade" id="tab-1" role="tabpanel" aria-labelledby="tab-line-1">
         <?= $this->render('_y-lenh'); ?>
     </div>
     <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-line-2">
@@ -44,6 +48,9 @@
     </div>
     <div class="tab-pane fade" id="tab-5" role="tabpanel" aria-labelledby="tab-line-5">
         <?= $this->render('_file-stl'); ?>
+    </div>
+    <div class="tab-pane fade active show print" id="tab-6" role="tabpanel" aria-labelledby="tab-line-6">
+        <?= $this->render('_dental-form'); ?>
     </div>
 </div>
 
