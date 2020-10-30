@@ -43,7 +43,7 @@ $css = <<< CSS
 
 .page .page-content {
     height: 257mm;
-    outline: 2cm #FFEAEA solid;
+    /*outline: 2cm #FFEAEA solid;*/
 }
 
 .clinic-info .clinic-name {
