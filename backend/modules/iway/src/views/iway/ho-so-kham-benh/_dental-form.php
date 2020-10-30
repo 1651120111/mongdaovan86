@@ -43,6 +43,7 @@ $css = <<< CSS
 
 .page .page-content {
     height: 257mm;
+    outline: 2cm #FFEAEA solid;
 }
 
 .clinic-info .clinic-name {
@@ -140,7 +141,7 @@ $this->registerCss($css);
     <!-- #page-1 -->
     <div id="page-1" class="page">
         <div class="page-content">
-            <div class="page-header">
+            <div class="page-header mb-30">
                 <div class="row align-items-center mb-10">
                     <div class="col-6">
                         <div class="logo"><img
@@ -169,7 +170,7 @@ $this->registerCss($css);
                 <div class="row">
                     <div class="col-6">
                         <div class="clinic-info">
-                            <div class="clinic-name font-15 mb-10">
+                            <div class="clinic-name font-16 mb-10">
                                 <span>TRUNG TÂM CHỈNH RĂNG iWAY CLUB</span>
                             </div>
                             <div class="clinic-address">
@@ -186,7 +187,7 @@ $this->registerCss($css);
                     </div>
                     <div class="col-6">
                         <div class="patient-info">
-                            <div class="pi-title font-15 mb-10">
+                            <div class="pi-title font-16 mb-10">
                                 <span class="font-weight-bold">THÔNG TIN</span>
                                 <span class="font-weight-normal">KHÁCH HÀNG</span>
                             </div>
@@ -194,8 +195,9 @@ $this->registerCss($css);
                                 <ul class="list-unstyled">
                                     <li class="mb-10">Tên khách hàng: Đào Văn Mong</li>
                                     <li class="mb-10">Mã số khách hàng: IWC-00001</li>
-                                    <li class="mb-10">Ngày sinh: 12-08-1986</li>
-                                    <li class="d-flex mb-10">Giới tính:
+                                    <li class="d-flex mb-10">
+                                        <div class="mr-5">Ngày sinh: 12-08-1986</div>
+
                                         <div class="custom-control custom-checkbox ml-1">
                                             <input type="checkbox" class="custom-control-input"
                                                    name="gender1"
@@ -217,7 +219,7 @@ $this->registerCss($css);
                 </div>
             </div>
             <div class="page-body">
-                <div class="row row-1 mb-5">
+                <div class="row row-1 mb-15">
                     <div class="col-12">
                         <div class="customer-wish">
                             <div class="cw-title font-weight-bold font-16 mb-10">I. KHÁCH HÀNG MONG MUỐN</div>
@@ -271,7 +273,7 @@ $this->registerCss($css);
                     </div>
                 </div>
 
-                <div class="row row-2">
+                <div class="row row-2 mb-15">
                     <div class="col-12">
                         <div class="soft-tissue">
                             <div class="st-title font-weight-bold font-16 mb-10">II. MÔ MỀM</div>
@@ -362,6 +364,11 @@ $this->registerCss($css);
                                         <label class="custom-control-label" for="soft_tissue_II3_3">Trung bình</label>
                                     </div>
                                 </div>
+
+                                <div class="st-r-4 mb-5">
+                                    <div class="title font-weight-bold mb-10">4. Mặt bất đối xứng khi nhìn thẳng</div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -377,26 +384,21 @@ $this->registerCss($css);
             <div class="row row-1 mb-10">
                 <div class="col-12">
                     <div class="soft-tissue">
-                        <div class="st-content">
-                            <div class="st-r-4 mb-5">
-                                <div class="title font-weight-bold mb-10">4. Mặt bất đối xứng khi nhìn thẳng</div>
-                                <div class="custom-control custom-checkbox mb-5">
-                                    <input name="soft_tissue_II4[]" value="1" type="checkbox"
-                                           class="custom-control-input" id="soft_tissue_II4_1">
-                                    <label class="custom-control-label" for="soft_tissue_II4_1">Có</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-5">
-                                    <input name="soft_tissue_II4[]" value="1" type="checkbox"
-                                           class="custom-control-input" id="soft_tissue_II4_2">
-                                    <label class="custom-control-label" for="soft_tissue_II4_2">Không</label>
-                                </div>
-                            </div>
+                        <div class="custom-control custom-checkbox mb-5">
+                            <input name="soft_tissue_II4[]" value="1" type="checkbox"
+                                   class="custom-control-input" id="soft_tissue_II4_1">
+                            <label class="custom-control-label" for="soft_tissue_II4_1">Có</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-5">
+                            <input name="soft_tissue_II4[]" value="1" type="checkbox"
+                                   class="custom-control-input" id="soft_tissue_II4_2">
+                            <label class="custom-control-label" for="soft_tissue_II4_2">Không</label>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row row-2 mb-10">
+            <div class="row row-1 mb-10">
                 <div class="col-12">
                     <div class="jaw-bone-correlation">
                         <div class="jbc-title font-weight-bold font-16 mb-10">III. TƯƠNG QUAN XƯƠNG HÀM</div>
@@ -515,7 +517,7 @@ $this->registerCss($css);
                 </div>
             </div>
 
-            <div class="row row-3">
+            <div class="row row-2">
                 <div class="col-12">
                     <div class="increased-relationship">
                         <div class="ir-title font-weight-bold font-16 mb-10">IV. TƯƠNG QUAN RĂNG</div>
@@ -569,6 +571,7 @@ $this->registerCss($css);
                                     </div>
                                 </div>
                             </div>
+
                             <div class="ir-r-2 mb-5">
                                 <div class="title font-weight-bold mb-10">2. Tương quan răng nanh:</div>
                                 <div class="row">
@@ -618,6 +621,19 @@ $this->registerCss($css);
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="ir-r-3 mb-5">
+                                <div class="title font-weight-bold mb-10">3. Độ cắn phủ <span class="font-weight-normal">(overbite):</span>
+                                    <span class="font-weight-normal">.………………………………………………………………………………………………………………………………mm</span>
+                                </div>
+                            </div>
+
+                            <div class="ir-r-4 mb-5">
+                                <div class="title font-weight-bold mb-10">4. Độ cắn chìa <span
+                                            class="font-weight-normal">(overjet):</span>
+                                    <span class="font-weight-normal">.……………………………………………………………………………………………………………………………………mm</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -633,19 +649,6 @@ $this->registerCss($css);
                 <div class="col-12">
                     <div class="increased-relationship">
                         <div class="ir-content">
-                            <div class="ir-r-3 mb-5">
-                                <div class="title font-weight-bold mb-10">3. Độ cắn phủ <span class="font-weight-light">(overbite):</span>
-                                    <span class="font-weight-light">…………………………………………………………………..………………………..…………. mm</span>
-                                </div>
-                            </div>
-
-                            <div class="ir-r-4 mb-5">
-                                <div class="title font-weight-bold mb-10">4. Độ cắn chìa <span
-                                            class="font-weight-light">(overjet):</span>
-                                    <span class="font-weight-light">…………………………………………………………………..………………………..…………. mm</span>
-                                </div>
-                            </div>
-
                             <div class="ir-r-5 mb-5">
                                 <div class="title font-weight-bold mb-10">5. Đường giữa so với đường giữa mặt:</div>
                                 <div class="row">
@@ -831,13 +834,13 @@ $this->registerCss($css);
 
                             <div class="ir-r-12 mb-5">
                                 <div class="title font-weight-bold mb-10">12. Khoảng cách răng cửa dưới tới đường APo:
-                                    <span class="font-weight-light">…………………………………………………………………..………………………..…………. mm</span>
+                                    <span class="font-weight-normal">.…………………………………………………………………………………mm</span>
                                 </div>
                             </div>
 
                             <div class="ir-r-13 mb-5">
                                 <div class="title font-weight-bold mb-10">13. Góc IMPA:
-                                    <span class="font-weight-light">:...................................................................................................................................................................độ</span>
+                                    <span class="font-weight-normal">:.…………………………………………………………………………………………………………………………………………………………độ</span>
                                 </div>
                             </div>
                         </div>
@@ -857,8 +860,15 @@ $this->registerCss($css);
                             </div>
                             <div class="mb-5">
                                 .………………………………………………………………………………………………………………………………………………………………………………………………
+                                .………………………………………………………………………………………………………………………………………………………………………………………………
+                                .………………………………………………………………………………………………………………………………………………………………………………………………
+                                .………………………………………………………………………………………………………………………………………………………………………………………………
                             </div>
-
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input name="increased_relationship[]" value="1" type="checkbox"
+                                       class="custom-control-input" id="tdh_problem_2">
+                                <label class="custom-control-label" for="tdh_problem_2">Không</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -876,14 +886,6 @@ $this->registerCss($css);
                     <div class="tdh-problem">
                         <div class="tdh-content">
                             <div class="mb-5">
-                                .………………………………………………………………………………………………………………………………………………………………………………………………
-                                .………………………………………………………………………………………………………………………………………………………………………………………………
-                                .………………………………………………………………………………………………………………………………………………………………………………………………
-                            </div>
-                            <div class="custom-control custom-checkbox mb-5">
-                                <input name="increased_relationship[]" value="1" type="checkbox"
-                                       class="custom-control-input" id="tdh_problem_2">
-                                <label class="custom-control-label" for="tdh_problem_2">Không</label>
                             </div>
                         </div>
                     </div>
