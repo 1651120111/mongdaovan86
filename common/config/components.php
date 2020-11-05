@@ -30,7 +30,7 @@ return [
         'channel' => 'default', // Queue channel key
         'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
     ],
-
+    
     'i18n' => [
         'translations' => [
             'app' => [
@@ -68,39 +68,6 @@ return [
         'thousandSeparator' => ',',
 //        'currencyCode' => '₫',
     ],
-<<<<<<< HEAD
-    'mailer' => [
-        'class' => 'yii\swiftmailer\Mailer',
-        'viewPath' => '@frontend/mail',
-        'useFileTransport' => false,
-        'transport' => [
-            'class' => 'Swift_SmtpTransport',
-            'host' => 'smtp.gmail.com',
-            'username' => 'runhitbtn2@gmail.com',
-            'password' => 'Soccer98987@',
-            'port' => '587',
-            'encryption' => 'tls',
-            'streamOptions' => [
-                'ssl' => [
-                    'verify_peer' => false,
-                    'allow_self_signed' => true
-                ],
-            ]
-        ],
-        'formatter' => [
-            'class' => 'yii\i18n\Formatter',
-            'nullDisplay' => '-',
-            'dateFormat' => 'php:d-m-Y',
-            'datetimeFormat' => 'php:d-m-Y H:i:s',
-            'timeFormat' => 'php:H:i:s',
-            'locale' => 'vi_VN',
-            'decimalSeparator' => ',',
-            'thousandSeparator' => ' ',
-//        'currencyCode' => '₫',
-        ],
-    ]
-];
-=======
     'commandBus' => [
         'class' => trntv\bus\CommandBus::class,
         'middlewares' => [
@@ -112,4 +79,3 @@ return [
         ]
     ],
 ];
->>>>>>> master
