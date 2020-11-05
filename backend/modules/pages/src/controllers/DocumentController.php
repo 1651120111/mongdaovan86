@@ -2,19 +2,39 @@
 
 namespace modava\pages\controllers;
 
+<<<<<<< HEAD
 use backend\components\MyComponent;
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
 use modava\imagick\Helper;
 use modava\pages\components\MyPagesController;
 use modava\pages\components\MyUpload;
+<<<<<<< HEAD
 use modava\pages\models\Document;
 use modava\pages\models\search\DocumentSearch;
 use modava\pages\PagesModule;
+=======
+>>>>>>> master
+use yii\db\Exception;
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
 use Yii;
 use yii\db\Exception;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
+<<<<<<< HEAD
+=======
+use modava\pages\PagesModule;
+use modava\pages\components\MyPagesController;
+use modava\pages\models\Document;
+use modava\pages\models\search\DocumentSearch;
+<<<<<<< HEAD
+=======
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
 use yii\web\UploadedFile;
+>>>>>>> master
 
 /**
  * DocumentController implements the CRUD actions for Document model.
@@ -22,8 +42,13 @@ use yii\web\UploadedFile;
 class DocumentController extends MyPagesController
 {
     /**
+<<<<<<< HEAD
+    * {@inheritdoc}
+    */
+=======
      * {@inheritdoc}
      */
+>>>>>>> master
     public function behaviors()
     {
         return [
@@ -37,9 +62,15 @@ class DocumentController extends MyPagesController
     }
 
     /**
+<<<<<<< HEAD
+    * Lists all Document models.
+    * @return mixed
+    */
+=======
      * Lists all Document models.
      * @return mixed
      */
+>>>>>>> master
     public function actionIndex()
     {
         $searchModel = new DocumentSearch();
@@ -52,6 +83,18 @@ class DocumentController extends MyPagesController
             'dataProvider' => $dataProvider,
             'totalPage' => $totalPage,
         ]);
+<<<<<<< HEAD
+            }
+
+
+
+    /**
+    * Displays a single Document model.
+    * @param integer $id
+    * @return mixed
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+=======
     }
 
     public function actionDownloadFile($file)
@@ -70,6 +113,7 @@ class DocumentController extends MyPagesController
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+>>>>>>> master
     public function actionView($id)
     {
         return $this->render('view', [
@@ -78,15 +122,31 @@ class DocumentController extends MyPagesController
     }
 
     /**
+<<<<<<< HEAD
+    * Creates a new Document model.
+    * If creation is successful, the browser will be redirected to the 'view' page.
+    * @return mixed
+    */
+=======
      * Creates a new Document model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+>>>>>>> master
     public function actionCreate()
     {
         $model = new Document();
 
         if ($model->load(Yii::$app->request->post())) {
+<<<<<<< HEAD
+            if ($model->validate() && $model->save()) {
+                Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
+                    'title' => 'Thông báo',
+                    'text' => 'Tạo mới thành công',
+                    'type' => 'success'
+                ]);
+                return $this->redirect(['view', 'id' => $model->id]);
+=======
 
             $fileUpload = UploadedFile::getInstance($model, 'file');
             if ($fileUpload != null) {
@@ -122,6 +182,7 @@ class DocumentController extends MyPagesController
                     ]);
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
+>>>>>>> master
             } else {
                 $errors = Html::tag('p', 'Tạo mới thất bại');
                 foreach ($model->getErrors() as $error) {
@@ -141,17 +202,30 @@ class DocumentController extends MyPagesController
     }
 
     /**
+<<<<<<< HEAD
+    * Updates an existing Document model.
+    * If update is successful, the browser will be redirected to the 'view' page.
+    * @param integer $id
+    * @return mixed
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+=======
      * Updates an existing Document model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+>>>>>>> master
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
+<<<<<<< HEAD
+            if($model->validate()) {
+                if ($model->save()) {
+=======
             $fileUpload = UploadedFile::getInstance($model, 'file');
 
             if ($fileUpload != null) {
@@ -185,6 +259,7 @@ class DocumentController extends MyPagesController
                         }
                     }
 
+>>>>>>> master
                     Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                         'title' => 'Thông báo',
                         'text' => 'Cập nhật thành công',
@@ -211,12 +286,21 @@ class DocumentController extends MyPagesController
     }
 
     /**
+<<<<<<< HEAD
+    * Deletes an existing Document model.
+    * If deletion is successful, the browser will be redirected to the 'index' page.
+    * @param integer $id
+    * @return mixed
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+=======
      * Deletes an existing Document model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+>>>>>>> master
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -249,6 +333,7 @@ class DocumentController extends MyPagesController
     }
 
     /**
+<<<<<<< HEAD
      * @param $perpage
      */
     public function actionPerpage($perpage)
@@ -276,12 +361,23 @@ class DocumentController extends MyPagesController
     }
 
     /**
+=======
+<<<<<<< HEAD
+    * Finds the Document model based on its primary key value.
+    * If the model is not found, a 404 HTTP exception will be thrown.
+    * @param integer $id
+    * @return Document the loaded model
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+=======
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
      * Finds the Document model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return Document the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+>>>>>>> master
 
 
     protected function findModel($id)

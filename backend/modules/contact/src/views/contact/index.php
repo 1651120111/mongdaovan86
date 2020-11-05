@@ -95,24 +95,31 @@ try {
                                             'firstPageCssClass' => 'paginate_button page-item first',
                                             'lastPageCssClass' => 'paginate_button page-item last',
                                         ],
-                                        'columns' => array_merge([
-                                            [
-                                                'class' => 'yii\grid\SerialColumn',
-                                                'header' => 'STT',
-                                                'headerOptions' => [
-                                                    'width' => 50,
-                                                    'rowspan' => 2
-                                                ],
-                                                'filterOptions' => [
-                                                    'class' => 'd-none',
-                                                ],
-                                            ],
-                                            [
-                                                'attribute' => 'title',
-                                                'format' => 'raw',
-                                                'value' => function ($model) {
-                                                    return Html::a($model->title, ['view', 'id' => $model->id], [
-                                                        'title' => $model->title,
+										'fullname',
+										'phone',
+										'email:email',
+										'address',
+										'title',
+										//'content:ntext',
+										//'ip_address',
+                                        [
+                                            'class' => 'yii\grid\ActionColumn',
+                                            'header' => ContactModule::t('contact', 'Actions'),
+                                            'template' => '{update} {delete}',
+                                            'buttons' => [
+                                                'update' => function ($url, $model) {
+                                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                                        'title' => ContactModule::t('contact', 'Update'),
+                                                        'alia-label' => ContactModule::t('contact', 'Update'),
+                                                        'data-pjax' => 0,
+                                                        'class' => 'btn btn-info btn-xs'
+                                                    ]);
+                                                },
+                                                'delete' => function ($url, $model) {
+                                                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
+                                                        'title' => ContactModule::t('contact', 'Delete'),
+                                                        'class' => 'btn btn-danger btn-xs btn-del',
+                                                        'data-title' => ContactModule::t('contact', 'Delete?'),
                                                         'data-pjax' => 0,
                                                     ]);
                                                 }
@@ -128,7 +135,7 @@ try {
                                                 'value' => 'contactCategory.title',
                                             ],
                                             'ip_address',
-                                        ], $contactMetadataIndex)
+                                        ], $contactMetadataIndex
                                     ]); ?>
                                 </div>
                             </div>

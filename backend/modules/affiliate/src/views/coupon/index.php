@@ -5,6 +5,7 @@ use common\grid\MyGridView;
 use modava\affiliate\widgets\DropdownWidget;
 use modava\affiliate\widgets\NavbarWidgets;
 use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
@@ -60,16 +61,69 @@ $this->params['breadcrumbs'][] = $this->title;
                                             '{pager}
                                         </div>
                                     ',
-                                        'tableOptions' => [
-                                            'id' => 'dataTable',
-                                            'class' => 'dt-grid dt-widget pane-hScroll',
+                                    'pager' => [
+                                        'firstPageLabel' => AffiliateModule::t('affiliate', 'First'),
+                                        'lastPageLabel' => AffiliateModule::t('affiliate', 'Last'),
+                                        'prevPageLabel' => AffiliateModule::t('affiliate', 'Previous'),
+                                        'nextPageLabel' => AffiliateModule::t('affiliate', 'Next'),
+                                        'maxButtonCount' => 5,
+
+                                        'options' => [
+                                            'tag' => 'ul',
+                                            'class' => 'pagination',
                                         ],
-                                        'myOptions' => [
-                                            'class' => 'dt-grid-content my-content pane-vScroll',
-                                            'data-minus' => '{"0":95,"1":".hk-navbar","2":".nav-tabs","3":".hk-pg-header","4":".hk-footer-wrap"}'
+
+                                        // Customzing CSS class for pager link
+                                        'linkOptions' => ['class' => 'page-link'],
+                                        'activePageCssClass' => 'active',
+                                        'disabledPageCssClass' => 'disabled page-disabled',
+                                        'pageCssClass' => 'page-item',
+
+                                        // Customzing CSS class for navigating link
+                                        'prevPageCssClass' => 'paginate_button page-item',
+                                        'nextPageCssClass' => 'paginate_button page-item',
+                                        'firstPageCssClass' => 'paginate_button page-item',
+                                        'lastPageCssClass' => 'paginate_button page-item',
+                                    ],
+                                    'columns' => [
+                                        [
+                                            'class' => 'yii\grid\SerialColumn',
+                                            'header' => 'STT',
+                                            'headerOptions' => [
+                                                'width' => 60,
+                                                'rowspan' => 2
+                                            ],
+                                            'filterOptions' => [
+                                                'class' => 'd-none',
+                                            ],
                                         ],
-                                        'summaryOptions' => [
-                                            'class' => 'summary pull-right',
+                                         [
+                                            'attribute' => 'title',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return Html::a($model->title, ['view', 'id' => $model->id], [
+                                                    'title' => $model->title,
+                                                    'data-pjax' => 0,
+                                                ]);
+                                            }
+                                        ],
+										'coupon_code',
+                                        [
+                                            'attribute' => 'customer_id',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return $model->customer_id ? Html::a($model->customer->full_name, Url::toRoute(['/affiliate/customer/view', 'id' => $model->customer_id])) : '';
+                                            }
+                                        ],
+										'quantity',
+                                        'quantity_used',
+                                        [
+                                            'attribute' => 'expired_date',
+                                            'value' => function ($model) {
+                                                return $model->expired_date
+                                                    ? date('d-m-Y H:i', strtotime($model->expired_date))
+                                                    : '';
+                                            }
                                         ],
                                         'pager' => [
                                             'firstPageLabel' => Yii::t('receipt', 'First'),
@@ -95,17 +149,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'firstPageCssClass' => 'paginate_button page-item first',
                                             'lastPageCssClass' => 'paginate_button page-item last',
                                         ],
-                                        'columns' => [
-                                            [
-                                                'class' => 'yii\grid\SerialColumn',
-                                                'header' => 'STT',
-                                                'headerOptions' => [
-                                                    'width' => 60,
-                                                    'rowspan' => 2
-                                                ],
-                                                'filterOptions' => [
-                                                    'class' => 'd-none',
-                                                ],
+                                        [
+                                            'attribute' => 'created_at',
+                                            'format' => 'datetime',
+                                            'headerOptions' => [
+                                                'width' => 150,
                                             ],
                                             [
                                                 'class' => 'yii\grid\ActionColumn',

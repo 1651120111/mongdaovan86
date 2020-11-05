@@ -39,6 +39,9 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 
+/backend/runtime
+/backend/web/assets
+
 /common/config/configparams.php
 /common/config/config.php
 
@@ -55,17 +58,12 @@ phpunit.phar
 !/backend/web/uploads/
 /backend/web/uploads/*
 
-!/backend/web/uploads/filemanager/
-/backend/web/uploads/filemanager/*
-!/backend/web/uploads/filemanager/source/
-/backend/web/uploads/filemanager/source/*
-!/backend/web/uploads/filemanager/source/index.html
+/frontend/runtime
+/frontend/web/assets
+/frontend/.htaccess
 
-!/backend/web/uploads/filemanager/thumbs/
-/backend/web/uploads/filemanager/thumbs/*
-!/backend/web/uploads/filemanager/thumbs/index.html
-
-!/frontend/runtime/
+# Git
+!/frontend/runtime
 /frontend/runtime/*
 !/frontend/runtime/index.html
 
@@ -287,16 +285,3 @@ phpunit.phar
 /backend/widgets/select2/composer.json
 /backend/widgets/select2/README.md
 /backend/widgets/select2/.git
-
-/backend/widgets/input/composer.json
-/backend/widgets/input/README.md
-/backend/widgets/input/.git
-
-/backend/widgets/charts/composer.json
-/backend/widgets/charts/README.md
-/backend/widgets/charts/.git
-
-#assets manager
-/backend/web/modava-assets/composer.json
-/backend/web/modava-assets/README.md
-/backend/web/modava-assets/.git

@@ -37,7 +37,8 @@ class LoginForm extends Model
             ['password', 'validatePassword'],
 //            [['reCaptcha'], ReCaptchaValidator2::class,
 //                'secret' => RECAPTCHA_GOOGLE_SECRETKEY,
-//                'uncheckedMessage' => \Yii::t('backend', 'Vui lòng đánh dấu vào ô trên')/*, 'on' => self::SCENARIO_SUBMIT_LOGIN*/]
+
+//                'uncheckedMessage' => \AuthModule::t('auth', 'Vui lòng đánh dấu vào ô trên')/*, 'on' => self::SCENARIO_SUBMIT_LOGIN*/]
         ];
     }
 

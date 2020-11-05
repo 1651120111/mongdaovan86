@@ -79,8 +79,13 @@ class Coupon extends CouponTable
                 [
                     'class' => AttributeBehavior::class,
                     'attributes' => [
+<<<<<<< HEAD
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['expired_date','expired_date'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['expired_date','expired_date'],
+=======
                         ActiveRecord::EVENT_BEFORE_INSERT => ['expired_date'],
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['expired_date'],
+>>>>>>> master
                     ],
                     'value' => function ($event) {
                         return date('Y-m-d', strtotime($this->expired_date));
@@ -96,8 +101,18 @@ class Coupon extends CouponTable
     public function rules()
     {
         return [
+<<<<<<< HEAD
             [['title', 'slug', 'coupon_code', 'quantity', 'customer_id', 'coupon_type_id', 'promotion_type', 'promotion_value', 'expired_date'], 'required'],
             [['quantity', 'customer_id', 'coupon_type_id', 'quantity_used', 'promotion_type', 'count_sms_sent'], 'integer'],
+=======
+<<<<<<< HEAD
+			[['title', 'slug', 'coupon_code', 'quantity', 'customer_id', 'coupon_type_id', 'promotion_type', 'promotion_value',], 'required'],
+=======
+			[['title', 'slug','coupon_code', 'quantity', 'customer_id', 'coupon_type_id', 'promotion_type', 'promotion_value',], 'required'],
+>>>>>>> master
+			[['quantity', 'customer_id', 'coupon_type_id', 'quantity_used', 'promotion_type',], 'integer'],
+            ['quantity_used', 'validateQuantityUsed'],
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
             [['quantity', 'promotion_value'], 'compare', 'compareValue' => 0, 'operator' => '>=', 'type' => 'number'],
             [['max_discount', 'commission_for_owner'], 'number'],
             [['expired_date'], 'safe'],
@@ -181,6 +196,8 @@ class Coupon extends CouponTable
     {
         return $this->hasOne(CouponType::class, ['id' => 'coupon_type_id']);
     }
+<<<<<<< HEAD
+=======
 
     public function getCustomer()
     {
@@ -193,6 +210,7 @@ class Coupon extends CouponTable
             ->where(['customer_id' => $customerId])
             ->count();
     }
+<<<<<<< HEAD
 
     public static function checkCoupon($code)
     {
@@ -386,4 +404,7 @@ class Coupon extends CouponTable
             ];
         }
     }
+=======
+>>>>>>> master
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
 }

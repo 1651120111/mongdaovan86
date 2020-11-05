@@ -20,13 +20,20 @@ return [
     'Language' => 'Ngôn ngữ',
     'Name' => 'Tên',
     'Description' => 'Mô tả',
+<<<<<<< HEAD
+
+=======
     'Title' => 'Tiêu đề',
     'Image' => 'Hình',
     'Document' => 'Tài liệu',
     'Documents' => 'Tài liệu',
     'Partners' => 'Đối tác',
     'Partner' => 'Đối tác',
+<<<<<<< HEAD
     'Project' => 'Dự án',
     'Projects' => 'Dự án',
     'Tech' => 'Kỹ thuật',
+=======
+>>>>>>> master
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
 ];

@@ -1,11 +1,20 @@
 <?php
 
+<<<<<<< HEAD
 use dosamigos\datepicker\DatePicker;
 use kartik\select2\Select2;
 use modava\affiliate\models\Customer;
 use modava\affiliate\widgets\JsCreateModalWidget;
 use modava\datetime\DateTimePicker;
 use modava\website\models\table\KeyValueTable;
+=======
+<<<<<<< HEAD
+use modava\customer\components\CustomerDateTimePicker;
+=======
+use modava\affiliate\widgets\JsCreateModalWidget;
+use modava\datetime\DateTimePicker;
+>>>>>>> master
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\JsExpression;
@@ -28,6 +37,7 @@ if ($model->primaryKey === null) {
 }
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
+<<<<<<< HEAD
     <div class="coupon-form">
         <?php $form = ActiveForm::begin([
             'id' => 'coupon_form',
@@ -134,6 +144,93 @@ if ($model->primaryKey === null) {
                     'type' => 'content'
                 ]) ?>
             </div>
+=======
+<div class="coupon-form">
+    <?php $form = ActiveForm::begin([
+<<<<<<< HEAD
+        'enableAjaxValidation' => true,
+        'validationUrl' => Url::toRoute(['/affiliate/coupon/validate', 'id' => $model->primaryKey]), // Khi sử dụng cần test lại
+=======
+        'id' => 'coupon_form',
+        'enableAjaxValidation' => true,
+        'validationUrl' => Url::toRoute(['/affiliate/coupon/validate', 'id' => $model->primaryKey]),
+>>>>>>> master
+    ]); ?>
+    <div class="row">
+        <div class="col-6">
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <?= $form->field($model, 'coupon_code')->textInput(['maxlength' => true,]) ?>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" id="js-generate-coupon-code"><?=AffiliateModule::t('affiliate', 'Generate Coupon Code')?></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <?= $form->field($model, 'quantity')->textInput() ?>
+        </div>
+        <div class="col-6">
+<<<<<<< HEAD
+            <?= $form->field($model, 'expired_date')->widget(CustomerDateTimePicker::class, [
+=======
+            <?= $form->field($model, 'expired_date')->widget(DateTimePicker::class, [
+>>>>>>> master
+                'template' => '{input}{button}',
+                'pickButtonIcon' => 'btn btn-increment btn-light',
+                'pickIconContent' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-th']),
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-mm-yyyy hh:ii',
+                    'todayHighLight' => true,
+                ]
+            ]) ?>
+        </div>
+        <div class="col-6">
+<<<<<<< HEAD
+            <?= $form->field($model, 'customer_id')->textInput() ?>
+        </div>
+        <div class="col-6">
+            <?= $form->field($model, 'coupon_type_id')->dropDownList(
+                    ArrayHelper::map(\modava\affiliate\models\CouponType::getAll(), 'id', 'title'),
+=======
+            <?= $form->field($model, 'customer_id')->dropDownList(
+                ArrayHelper::map(\modava\affiliate\models\table\CustomerTable::getAllRecords(), 'id', function($model) { return $model['full_name'] . ' - ' . $model['phone']; }),
+                [ 'prompt' => AffiliateModule::t('affiliate', 'Select an option ...'),
+                    'id' => 'customer-id'
+                ]
+            ) ?>
+        </div>
+        <div class="col-6">
+            <?= $form->field($model, 'coupon_type_id')->dropDownList(
+                    ArrayHelper::map(\modava\affiliate\models\table\CouponTypeTable::getAllRecords(), 'id', 'title'),
+>>>>>>> master
+                    [ 'prompt' => AffiliateModule::t('affiliate', 'Select an option ...') ]
+            ) ?>
+        </div>
+        <div class="col-6">
+            <?= $form->field($model, 'promotion_type')->dropDownList(
+                Yii::$app->controller->module->params["promotion_type"],
+                [ 'prompt' => AffiliateModule::t('affiliate', 'Select an option ...'),
+                    'id' => 'promotion-type'
+                ]
+            ) ?>
+        </div>
+        <div class="col-6">
+            <?= $form->field($model, 'promotion_value')->textInput(['maxlength' => true]) ?>
+        </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
+        <div class="col-12">
+            <?= $form->field($model, 'description')->widget(\modava\tiny\TinyMce::class, [
+                'options' => ['rows' => 6],
+            ]) ?>
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
         </div>
 
         <div class="form-group">
@@ -143,6 +240,12 @@ if ($model->primaryKey === null) {
         <?php ActiveForm::end(); ?>
     </div>
 
+<<<<<<< HEAD
+<?php
+$script = <<< JS
+function generateCouponCode() {
+    return Math.random(10).toString(36).substr(2);
+=======
 <?= JsCreateModalWidget::widget(['formClassName' => 'coupon_form', 'modelName' => 'Coupon']) ?>
 
 <?php
@@ -165,6 +268,7 @@ function generateCouponCode(customerId, upperCase = false) {
 function generateCouponCodeRandom(upperCase = false) {
     let code = Math.random(10).toString(36).substring(2,12);
     return upperCase ? code.toUpperCase() : code;
+>>>>>>> master
 }
 
 $('#coupon_form #js-generate-coupon-code').on('click', function() {
@@ -196,6 +300,7 @@ $('#coupon_form #js-generate-coupon-code').on('click', function() {
     $('#coupon-coupon_code').val(generateCouponCodeRandom(true)).trigger('change');
 });
 
+<<<<<<< HEAD
 $('#coupon_form #coupon-coupon_code').on('change keyup blur', function() {
     $(this).val($(this).val().toUpperCase());  
 });
@@ -205,5 +310,14 @@ $('#coupon_form [name="Coupon[promotion_value]"]').on('change', function () {
     let value = $(this).val() ? parseFloat($(this).val()) : 0;
     $('#coupon_form [name="Coupon[commission_for_owner]"]').val(parseFloat($('#coupon_form [name="Coupon[max_discount]"]').val()) - value);
 });
+=======
+<<<<<<< HEAD
+=======
+$('#coupon-coupon_code').on('change keyup blur', function() {
+    $(this).val($(this).val().toUpperCase());  
+});
+
+>>>>>>> master
+>>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
 JS;
 $this->registerJs($script, \yii\web\View::POS_END);
