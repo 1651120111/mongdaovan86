@@ -1,17 +1,165 @@
+function previewImage(preview, src) {
+    if (!preview.is('img')) {
+        var img = preview.children('img');
+        if (img.length <= 0) preview.html('<img src="" alt="Preview"/>');
+        preview = preview.children('img');
+    }
+    preview.attr('src', src);
+}
+
+function readURL(input, preview) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            previewImage(preview, e.target.result);
+            $('input[name="IwayTrayImages[fileImageBase64]"]').val(e.target.result);
+            $(input).closest('.upload-zone').addClass('has-image').closest('.modal-body').addClass('change-image');
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        var img_default = $(input).attr('data-default') || null;
+        previewImage(preview, img_default);
+        if (img_default == null) {
+            $(input).closest('.upload-zone').removeClass('has-image');
+        }
+        $('input[name="IwayTrayImages[fileImageBase64]"]').val(null);
+        $(input).closest('.modal-body').removeClass('change-image');
+    }
+}
+
 function change_alias(alias) {
     var str = alias;
     str = str.toLowerCase();
-    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");
-    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");
-    str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i");
-    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");
-    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");
-    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");
-    str = str.replace(/đ/g,"d");
-    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
-    str = str.replace(/ + /g," ");
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
+    str = str.replace(/ + /g, " ");
     str = str.trim();
     return str;
+}
+
+/*
+* Implement by Hoang Duc
+* Date: 2020-09-24
+* Purpose: handle show hide child with parent value
+* Example: handleShowHide($('[name="Customer[online_source]"]'), ['facebook'], $('[name="Customer[fb_fanpage]"], [name="Customer[fb_customer]"]'));
+* */
+function handleShowHide(parrentEle, parrentValues = [], childEles) {
+    let onlineSource = $(parrentEle).val();
+
+    if (parrentValues.includes(onlineSource)) {
+        $(childEles).closest('.form-group').show(300);
+    } else {
+        $(childEles).closest('.form-group').hide(300);
+        $(childEles).val('').trigger('change');
+    }
+}
+
+function registerShowHide(parrentEle, parrentValues = [], childEles, eventName = 'change') {
+    handleShowHide($(parrentEle), parrentValues, childEles);
+    $(parrentEle).on(eventName, function () {
+        handleShowHide($(parrentEle), parrentValues, childEles);
+    });
+}
+
+function copyToClipboard(text) {
+    let dummy = document.createElement("input");
+    document.body.appendChild(dummy);
+    dummy.setAttribute("id", "dummy_id");
+    document.getElementById("dummy_id").value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    $.toast({
+        heading: 'Thông báo',
+        text: 'Copy thành công',
+        position: 'top-right',
+        class: 'jq-toast-success',
+        hideAfter: 2000,
+        stack: 6,
+        showHideTransition: 'fade'
+    });
+}
+
+function saveStateSearchPanel(searchPanel, button, key) {
+    if (!window.localStorage.getItem(key)) {
+        window.localStorage.setItem(key, 'show');
+    }
+
+    if (window.localStorage.getItem(key) === 'show') $(searchPanel).collapse('show');
+    else $(searchPanel).collapse('hide');
+
+    $(button).on('click', function () {
+        if (window.localStorage.getItem(key) === 'show') {
+            window.localStorage.setItem(key, 'hide');
+        } else {
+            window.localStorage.setItem(key, 'show');
+        }
+    });
+}
+
+function formatToRawNumber(number) {
+    let result = parseFloat(number.toString().replace(/,/g, ''));
+    return isNaN(result) ? 0 : result;
+}
+
+function formatAsDecimal(number) {
+    return new Intl.NumberFormat('en-US').format(formatToRawNumber(number));
+}
+
+function formatAsCurrency(number, symbol = '₫') {
+    return formatAsDecimal(number) + ' ' + symbol;
+}
+
+function updateRecordAjax(recordId, data, url, confirmMessage = 'Bạn có muốn cập nhật', pAjaxContainerId = '#dt-pjax') {
+    let confimM = confirm(confirmMessage);
+    if (!confimM) return;
+    $.post(url + '?id=' + recordId, data).done(function (response) {
+        if (response) {
+            if (response.success) {
+                $.toast({
+                    heading: 'Thông báo',
+                    text: 'Thành công',
+                    position: 'top-right',
+                    class: 'jq-toast-success',
+                    hideAfter: 3500,
+                    stack: 6,
+                    showHideTransition: 'fade'
+                });
+                if (pAjaxContainerId) {
+                    $.pjax.reload({container: pAjaxContainerId, url: window.location.href});
+                } else {
+                    window.location.reload();
+                }
+            } else {
+                $.toast({
+                    heading: 'Thông báo',
+                    text: 'Thất bại: ' + response.error.join(', '),
+                    position: 'top-right',
+                    class: 'jq-toast-warning',
+                    hideAfter: 3500,
+                    stack: 6,
+                    showHideTransition: 'fade'
+                });
+            }
+
+        } else {
+            $.toast({
+                heading: 'Thông báo',
+                text: 'Thất bại: Lỗi không xác định',
+                position: 'top-right',
+                class: 'jq-toast-warning',
+                hideAfter: 3500,
+                stack: 6,
+                showHideTransition: 'fade'
+            });
+        }
+    });
 }
 
 $(function () {
@@ -76,6 +224,7 @@ $(function () {
             element_load_data = el.attr('load-data-element') || null,
             self_key = el.attr('load-data-key') || null,
             data_add = el.attr('load-data-data') || '{}',
+            removeEmptyOption = el.attr('load-data-removeemptyoption') || null,
             callback = el.attr('load-data-callback') || null,
             method_load = el.attr('load-data-method') || 'POST';
         if (url_load_data === null) {
@@ -98,7 +247,11 @@ $(function () {
         data[self_key] = el.val();
         data = Object.assign(JSON.parse(data_add), data);
         console.log(data_add, JSON.parse(data_add), data);
-        $(element_load_data).find('option[value!=""]').remove();
+        if (removeEmptyOption) {
+            $(element_load_data).html('');
+        } else {
+            $(element_load_data).find('option[value!=""]').remove();
+        }
         $.ajax({
             type: method_load,
             url: url_load_data,
@@ -132,6 +285,46 @@ $(function () {
         }).fail(function (f) {
             console.log('Load data fail');
         });
+    });
+
+    $('body').on('click', '.copy', function () {
+        copyToClipboard($(this).data('copy'));
+    }).on('click', '.clear-value', function (e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+
+        let input = $(this).closest('.input-group').find('input, select');
+
+        if (input.hasClass('data-krajee-daterangepicker')) {
+            input.trigger('cancel.daterangepicker');
+        } else {
+            input.val('').trigger('change');
+        }
+    }).on('post-object-created', function () {
+        if ($('.pjax-container').length) {
+            $.pjax.reload({container: '#' + $('.pjax-container').attr('id')});
+        } else {
+            window.location.reload();
+        }
+
+    }).on('shown.bs.collapse hidden.bs.collapse', '.save-state-search', function () {
+        customPjax.setHeightContent();
+    });
+
+    $('.save-state-search').each(function () {
+        saveStateSearchPanel($(this), $(this).closest('.hk-sec-wrapper').find('.btn-hide-search'), $(this).data('search-panel'));
+    });
+
+    $('body').on('click', '.btn-iway-images', function () {
+        var el = $(this),
+            url = el.attr('data-load');
+        $('#modal-image .modal-content').load(url);
+        $('#modal-image').modal('show');
+    }).on('click', '.upload-zone.disabled', function (e) {
+        e.preventDefault();
+        return false;
+    }).on('click', '.upload-zone .refresh', function () {
+        $(this).closest('.upload-zone').find('.btn-upload input[type="file"]').val('').trigger('change');
     });
 });
 

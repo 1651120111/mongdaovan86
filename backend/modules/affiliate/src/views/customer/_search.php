@@ -1,6 +1,6 @@
 <?php
 
-use modava\affiliate\models\Partner;
+use modava\affiliate\models\table\PartnerTable;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -17,6 +17,7 @@ $templateInput = [
 <div class="customer-search">
 
     <?php $form = ActiveForm::begin([
+        'id' => 'customer-search',
         'action' => ['index'],
         'method' => 'get',
         'options' => [
@@ -24,23 +25,23 @@ $templateInput = [
         ],
     ]); ?>
 
-    <section class="hk-sec-wrapper mb-2">
-        <div class="row collapse show" id="search-panel">
+    <section class="hk-sec-wrapper p-1">
+        <div class="row collapse show save-state-search" data-search-panel="affiliate-customer-search-panel" id="search-panel">
             <div class="col-md-3 col-sm-4 col-lg-3">
                 <div class="form-group row">
                     <div class="col-12">
                         <?= $form->field($model, 'keyword', $templateInput)
                             ->textInput(['maxlength' => true])
-                            ->label(Yii::t('backend', 'Tên, SĐT'))
+                            ->label(Yii::t('backend', 'Tên, SĐT, CMND/CTCD'))
                             ->input('text',
-                                ['placeholder' => Yii::t('backend', 'Tên, SĐT')]) ?>
+                                ['placeholder' => Yii::t('backend', 'Tên, SĐT, CMND/CTCD')]) ?>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-4 col-lg-3">
                 <div class="form-group row">
                     <div class="col-12">
-                        <?= $form->field($model, 'partner_id', $templateInput)->dropDownList(ArrayHelper::map(Partner::getAllRecords(), 'id', 'title'), [
+                        <?= $form->field($model, 'partner_id', $templateInput)->dropDownList(ArrayHelper::map(PartnerTable::getAllRecords(), 'id', 'title'), [
                             'prompt' => Yii::t('backend', 'Chọn một giá trị ...')
                         ]) ?>
                     </div>
@@ -60,10 +61,3 @@ $templateInput = [
     <?php ActiveForm::end(); ?>
 
 </div>
-<?php
-
-$script = <<<JS
-saveStateSearchPanel('#search-panel', '.btn-hide-search', 'affiliate-customer-search-panel');
-JS;
-
-$this->registerJs($script, yii\web\View::POS_END);

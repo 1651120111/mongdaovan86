@@ -1,3 +1,21 @@
+function saveStateSearchPanel(searchPanel, button, key) {
+    if (!window.localStorage.getItem(key)) {
+        window.localStorage.setItem(key, 'show');
+    }
+
+    if (window.localStorage.getItem(key) === 'show') $(searchPanel).collapse('show');
+    else $(searchPanel).collapse('hide');
+
+    $(button).on('click', function() {
+        if (window.localStorage.getItem(key) === 'show') {
+            window.localStorage.setItem(key, 'hide');
+        }
+        else {
+            window.localStorage.setItem(key, 'show');
+        }
+    });
+}
+
 $(function () {
     "use strict";
 
@@ -117,6 +135,18 @@ $(function () {
     $('body').on('click', '.clear-value', function (e) {
         e.stopImmediatePropagation();
         $(this).closest('.input-group').find('input, select').val('').trigger('change');
+    }).on('post-object-created', function() {
+        window.location.reload();
+    }).on('shown.bs.collapse hidden.bs.collapse', '.save-state-search', function () {
+        customPjax.setHeightContent();
     });
 
+    $('.save-state-search').each(function () {
+        saveStateSearchPanel($(this), $(this).closest('.hk-sec-wrapper').find('.btn-hide-search'), $(this).data('search-panel'));
+    });
+
+    $('.light-gallery-container').lightGallery();
+    $(document).on('pjax:complete', function() {
+        $('.light-gallery-container').lightGallery();
+    })
 });

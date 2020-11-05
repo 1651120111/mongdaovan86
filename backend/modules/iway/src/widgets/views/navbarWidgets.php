@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Url;
-use modava\iway\IwayModule;
 
 // Define route info
 $routeInfos = [
@@ -31,6 +30,24 @@ $routeInfos = [
     ],
     [
         'module' => 'iway',
+        'controllerId' => 'order',
+        'label' => Yii::t('backend', 'Đơn hàng'),
+        'icon' => '<i class="glyphicon glyphicon-cog"></i>',
+    ],
+    [
+        'module' => 'iway',
+        'controllerId' => 'receipt',
+        'label' => Yii::t('backend', 'Phiếu thu'),
+        'icon' => '<i class="glyphicon glyphicon-cog"></i>',
+    ],
+    [
+        'module' => 'iway',
+        'controllerId' => 'treatment-schedule',
+        'label' => Yii::t('backend', 'Liệu trình điều trị'),
+        'icon' => '<i class="glyphicon glyphicon-cog"></i>',
+    ],
+    [
+        'module' => 'iway',
         'controllerId' => 'co-so',
         'label' => Yii::t('backend', 'Cơ sở'),
         'icon' => '<i class="ion ion-md-contacts"></i>',
@@ -43,8 +60,14 @@ $routeInfos = [
     ],
     [
         'module' => 'iway',
-        'controllerId' => 'iway/view',
+        'controllerId' => 'iway/doctor-view',
         'label' => Yii::t('backend', 'View doctor'),
+        'icon' => '<i class="glyphicon glyphicon-cog"></i>',
+    ],
+    [
+        'module' => 'iway',
+        'controllerId' => 'iway-tray',
+        'label' => Yii::t('backend', 'Tray'),
         'icon' => '<i class="glyphicon glyphicon-cog"></i>',
     ],
 ];

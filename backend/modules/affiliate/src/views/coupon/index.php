@@ -5,7 +5,6 @@ use common\grid\MyGridView;
 use modava\affiliate\widgets\DropdownWidget;
 use modava\affiliate\widgets\NavbarWidgets;
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
@@ -33,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <!-- Row -->
-
+        
         <?php Pjax::begin(['id' => 'coupon-gridview']); ?>
         <div class="row">
             <div class="col-xl-12">
@@ -61,105 +60,58 @@ $this->params['breadcrumbs'][] = $this->title;
                                             '{pager}
                                         </div>
                                     ',
-                                    'pager' => [
-                                        'firstPageLabel' => AffiliateModule::t('affiliate', 'First'),
-                                        'lastPageLabel' => AffiliateModule::t('affiliate', 'Last'),
-                                        'prevPageLabel' => AffiliateModule::t('affiliate', 'Previous'),
-                                        'nextPageLabel' => AffiliateModule::t('affiliate', 'Next'),
-                                        'maxButtonCount' => 5,
-
-                                        'options' => [
-                                            'tag' => 'ul',
-                                            'class' => 'pagination',
+                                        'tableOptions' => [
+                                            'id' => 'dataTable',
+                                            'class' => 'dt-grid dt-widget pane-hScroll',
                                         ],
-
-                                        // Customzing CSS class for pager link
-                                        'linkOptions' => ['class' => 'page-link'],
-                                        'activePageCssClass' => 'active',
-                                        'disabledPageCssClass' => 'disabled page-disabled',
-                                        'pageCssClass' => 'page-item',
-
-                                        // Customzing CSS class for navigating link
-                                        'prevPageCssClass' => 'paginate_button page-item',
-                                        'nextPageCssClass' => 'paginate_button page-item',
-                                        'firstPageCssClass' => 'paginate_button page-item',
-                                        'lastPageCssClass' => 'paginate_button page-item',
-                                    ],
-                                    'columns' => [
-                                        [
-                                            'class' => 'yii\grid\SerialColumn',
-                                            'header' => 'STT',
-                                            'headerOptions' => [
-                                                'width' => 60,
-                                                'rowspan' => 2
-                                            ],
-                                            'filterOptions' => [
-                                                'class' => 'd-none',
-                                            ],
+                                        'myOptions' => [
+                                            'class' => 'dt-grid-content my-content pane-vScroll',
+                                            'data-minus' => '{"0":95,"1":".hk-navbar","2":".nav-tabs","3":".hk-pg-header","4":".hk-footer-wrap","5":".coupon-search"}'
                                         ],
-                                         [
-                                            'attribute' => 'title',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                return Html::a($model->title, ['view', 'id' => $model->id], [
-                                                    'title' => $model->title,
-                                                    'data-pjax' => 0,
-                                                ]);
-                                            }
-                                        ],
-										'coupon_code',
-                                        [
-                                            'attribute' => 'customer_id',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                return $model->customer_id ? Html::a($model->customer->full_name, Url::toRoute(['/affiliate/customer/view', 'id' => $model->customer_id])) : '';
-                                            }
-                                        ],
-										'quantity',
-                                        'quantity_used',
-                                        [
-                                            'attribute' => 'expired_date',
-                                            'value' => function ($model) {
-                                                return $model->expired_date
-                                                    ? date('d-m-Y H:i', strtotime($model->expired_date))
-                                                    : '';
-                                            }
+                                        'summaryOptions' => [
+                                            'class' => 'summary pull-right',
                                         ],
                                         'pager' => [
-                                            'firstPageLabel' => Yii::t('receipt', 'First'),
-                                            'lastPageLabel' => Yii::t('receipt', 'Last'),
-                                            'prevPageLabel' => Yii::t('receipt', 'Previous'),
-                                            'nextPageLabel' => Yii::t('receipt', 'Next'),
+                                            'firstPageLabel' => Yii::t('backend', 'First'),
+                                            'lastPageLabel' => Yii::t('backend', 'Last'),
+                                            'prevPageLabel' => Yii::t('backend', 'Previous'),
+                                            'nextPageLabel' => Yii::t('backend', 'Next'),
                                             'maxButtonCount' => 5,
-
+                                            
                                             'options' => [
                                                 'tag' => 'ul',
                                                 'class' => 'pagination pull-left',
                                             ],
-
+                                            
                                             // Customzing CSS class for pager link
                                             'linkOptions' => ['class' => 'page-link'],
                                             'activePageCssClass' => 'active',
                                             'disabledPageCssClass' => 'disabled page-disabled',
                                             'pageCssClass' => 'page-item',
-
+                                            
                                             // Customzing CSS class for navigating link
                                             'prevPageCssClass' => 'paginate_button page-item prev',
                                             'nextPageCssClass' => 'paginate_button page-item next',
                                             'firstPageCssClass' => 'paginate_button page-item first',
                                             'lastPageCssClass' => 'paginate_button page-item last',
                                         ],
-                                        [
-                                            'attribute' => 'created_at',
-                                            'format' => 'datetime',
-                                            'headerOptions' => [
-                                                'width' => 150,
+                                        'columns' => [
+                                            [
+                                                'class' => 'yii\grid\SerialColumn',
+                                                'header' => 'STT',
+                                                'headerOptions' => [
+                                                    'width' => 60,
+                                                    'rowspan' => 2
+                                                ],
+                                                'filterOptions' => [
+                                                    'class' => 'd-none',
+                                                ],
                                             ],
                                             [
                                                 'class' => 'yii\grid\ActionColumn',
                                                 'header' => Yii::t('backend', 'Actions'),
                                                 'template' => DropdownWidget::widget([
-                                                    'title' => Yii::t('t', 'Hành động'),
+                                                    'title' => Yii::t('backend', 'Hành động'),
                                                     'dropdowns' => [
                                                         '{send-sms-to-customer}',
                                                         '{show-sms-coupon-content}',
@@ -177,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'buttons' => [
                                                     'send-sms-to-customer' => function ($url, $model) {
                                                         if (!$model->couponCanUse() || $model->count_sms_sent >= 3 || $model->customer->partner_id == 2) return '';
-
+                                                        
                                                         return Html::a('<i class="glyphicon glyphicon-send"></i> ' . Yii::t('backend', 'Gửi SMS đến KH'), 'javascript:;', [
                                                             'title' => Yii::t('backend', 'Gửi cho KH'),
                                                             'alia-label' => Yii::t('backend', 'Gửi cho KH'),
@@ -188,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     },
                                                     'update' => function ($url, $model) {
                                                         if ($model->quantity_used > 0) return Html::button('Coupon đã sử dụng không được sửa', ['class' => 'btn btn-danger btn-xs my-1']);
-
+                                                        
                                                         return Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('backend', 'Update'), $url, [
                                                             'title' => Yii::t('backend', 'Update'),
                                                             'alia-label' => Yii::t('backend', 'Update'),
@@ -198,7 +150,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     },
                                                     'delete' => function ($url, $model) {
                                                         if ($model->quantity_used > 0) return Html::button('Coupon đã sử dụng không được xóa', ['class' => 'btn btn-danger btn-xs']);
-
+                                                        
                                                         return Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('backend', 'Delete'), 'javascript:;', [
                                                             'title' => Yii::t('backend', 'Delete'),
                                                             'class' => 'btn btn-danger btn-xs btn-del m-1',
@@ -212,7 +164,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     },
                                                     'show-sms-coupon-content' => function ($url, $model) {
                                                         if ($model->customer->partner->slug !== 'kols') return '';
-
+                                                        
                                                         return '<button type="button" class="btn btn-primary btn-xs m-1" data-action="show-sms-coupon-content" data-coupon-id="' . $model->primaryKey . '" data-toggle="modal" data-target="#coupon-index-modal">Gửi SMS đến Fan</button>';
                                                     }
                                                 ],
@@ -227,7 +179,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         ]) . '<br/>';
                                                     $content .= '<strong>Mã Coupon: </strong>' . $model->coupon_code . '<br/>';
                                                     $content .= '<strong>Số lần gửi SMS: </strong>' . $model->count_sms_sent . '<br/>';
-
+                                                    
                                                     return $content;
                                                 },
                                                 'headerOptions' => [
@@ -239,11 +191,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
                                                     $content = '';
-
+                                                    
                                                     $content .= '<strong>Số lượng: </strong>' . $model->quantity . '<br/>';
                                                     $content .= '<strong>Đã sử dụng: </strong>' . $model->quantity_used . '<br/>';
                                                     $content .= '<strong>Ngày hết hạn: </strong>' . ($model->expired_date ? Yii::$app->formatter->asDate($model->expired_date) : '') . '<br/>';
-
+                                                    
                                                     return $content;
                                                 },
                                                 'headerOptions' => [
@@ -267,11 +219,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
                                                     $content = '';
-
+                                                    
                                                     $content .= '<strong>Loại chiết khấu: </strong>' . Yii::t('backend', Yii::$app->getModule('affiliate')->params["promotion_type"][$model->promotion_type]) . '<br/>';
                                                     $content .= '<strong>Giá trị chiết khấu: </strong>' . $model->promotion_value . '<br/>';
                                                     $content .= '<strong>Cho chủ Coupon: </strong>' . $model->commission_for_owner . '<br/>';
-
+                                                    
                                                     return $content;
                                                 },
                                                 'headerOptions' => [

@@ -27,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <i class="fa fa-plus"></i> <?= Yii::t('backend', 'Create'); ?>        </a>
         </div>
 
+        <?php Pjax::begin(['id' => 'dt-pjax', 'timeout' => false, 'enablePushState' => true, 'clientOptions' => ['method' => 'GET']]); ?>
         <!-- Row -->
         <div class="row">
             <div class="col-xl-12">
+                <?= $this->render('_search', ['model' => $searchModel]); ?>
                 <section class="hk-sec-wrapper index">
-
-                    <?php Pjax::begin(['id' => 'dt-pjax', 'timeout' => false, 'enablePushState' => true, 'clientOptions' => ['method' => 'GET']]); ?>
                     <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key .
                         '-index']) ?>
                     <div class="row">
@@ -96,56 +96,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'columns' => [
                                             [
-                                                'class' => 'yii\grid\SerialColumn',
-                                                'header' => 'STT',
-                                                'headerOptions' => [
-                                                    'width' => 60,
-                                                    'rowspan' => 2
-                                                ],
-                                                'filterOptions' => [
-                                                    'class' => 'd-none',
-                                                ],
-                                            ],
-                                            [
-                                                'attribute' => 'title',
-                                                'format' => 'raw',
-                                                'value' => function ($model) {
-                                                    return Html::a($model->title, ['view', 'id' => $model->id], [
-                                                        'title' => $model->title,
-                                                        'data-pjax' => 0,
-                                                    ]);
-                                                }
-                                            ],
-                                            [
-                                                'attribute' => 'customer_id',
-                                                'format' => 'raw',
-                                                'value' => function ($model) {
-                                                    return Html::a($model->customer->fullname, Url::toRoute(['customer/view', 'id' => $model->customer_id]));
-                                                }
-                                            ],
-                                            [
-                                                'attribute' => 'status',
-                                                'value' => function ($model) {
-                                                    return $model->getDisplayDropdown($model->status, 'status');
-                                                }
-                                            ],
-                                            'start_time:datetime',
-                                            'description:raw',
-                                            [
-                                                'attribute' => 'created_by',
-                                                'value' => 'userCreated.userProfile.fullname',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
-                                            ],
-                                            [
-                                                'attribute' => 'created_at',
-                                                'format' => 'date',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
-                                            ],
-                                            [
                                                 'class' => 'yii\grid\ActionColumn',
                                                 'header' => Yii::t('backend', 'Actions'),
                                                 'template' => '{update} {delete}',
@@ -175,16 +125,55 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'width' => 150,
                                                 ],
                                             ],
+                                            [
+                                                'attribute' => 'title',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return Html::a($model->title, ['view', 'id' => $model->id], [
+                                                        'title' => $model->title,
+                                                        'data-pjax' => 0,
+                                                    ]);
+                                                }
+                                            ],
+                                            [
+                                                'attribute' => 'customer_id',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return $model->getDisplayRelatedField('customer_id', 'customer', 'customer', 'fullname');
+                                                }
+                                            ],
+                                            [
+                                                'attribute' => 'status',
+                                                'value' => function ($model) {
+                                                    return $model->getDisplayDropdown($model->status, 'status');
+                                                }
+                                            ],
+                                            'start_time:datetime',
+                                            'description:raw',
+                                            [
+                                                'attribute' => 'created_by',
+                                                'value' => 'userCreated.userProfile.fullname',
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
+                                            ],
+                                            [
+                                                'attribute' => 'created_at',
+                                                'format' => 'date',
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
+                                            ],
                                         ],
                                     ]); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php Pjax::end(); ?>
                 </section>
             </div>
         </div>
+        <?php Pjax::end(); ?>
     </div>
 <?php
 $urlChangePageSize = \yii\helpers\Url::toRoute(['perpage']);

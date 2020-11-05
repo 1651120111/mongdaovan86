@@ -1,6 +1,7 @@
 <?php
 use modava\affiliate\models\Coupon;
 use modava\affiliate\models\Customer;
+use modava\affiliate\models\Feedback;
 use modava\affiliate\models\Order;
 use modava\affiliate\models\Payment;
 use modava\affiliate\models\SmsLog;
@@ -64,9 +65,9 @@ return [
         '1' => Yii::t('backend', 'For Partner System'),
     ],
     'feedback_type' => [
-        '0' => Yii::t('backend', 'Unsatisfied'),
-        '1' => Yii::t('backend', 'Satisfied'),
-        '2' => Yii::t('backend', 'Bình thường'),
+        Feedback::UNSATISFIED_TYPE => Yii::t('backend', 'Unsatisfied'),
+        Feedback::SATISFIED_TYPE => Yii::t('backend', 'Satisfied'),
+        Feedback::NORMAL_TYPE => Yii::t('backend', 'Bình thường'),
     ],
     'feedback_type_color' => [
         '0' => '#ab26aa',
@@ -82,7 +83,8 @@ return [
         Order::CHUA_HOAN_THANH => Yii::t('backend', 'Chưa hoàn thành'),
         Order::HOAN_THANH => Yii::t('backend', 'Hoàn thành'),
         Order::HUY => Yii::t('backend', 'Hủy'),
-        Order::KE_TOAN_DUYET => Yii::t('backend', 'Kế toán đã duyệt')
+        Order::KE_TOAN_DUYET => Yii::t('backend', 'Lễ tân đã xác nhận thu tiền'),
+        Order::DA_THANH_TOAN => Yii::t('backend', 'Đã thanh toán')
     ],
     'note_is_recall' => [
         '0' => Yii::t('backend', 'Chưa gọi'),
@@ -95,5 +97,9 @@ return [
     'sms_log_status' => [
         SmsLog::STATUS_SUCCESS => Yii::t('backend', 'Thành công'),
         SmsLog::STATUS_FAIL => Yii::t('backend', 'Thất bại'),
-    ]
+    ],
+    'customer_payment_type' => [
+        Customer::PAYMENT_TYPE_TRANSFER => Yii::t('backend', 'Chuyển khoản ngân hàng'),
+        Customer::PAYMENT_TYPE_CASH => Yii::t('backend', 'Tiền mặt'),
+    ],
 ];

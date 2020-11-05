@@ -1,10 +1,10 @@
 <?php
 
+use backend\widgets\ToastrWidget;
+use common\grid\MyGridView;
+use modava\iway\helpers\Utils;
 use modava\iway\widgets\NavbarWidgets;
 use yii\helpers\Html;
-use common\grid\MyGridView;
-use backend\widgets\ToastrWidget;
-use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -27,12 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <i class="fa fa-plus"></i> <?= Yii::t('backend', 'Create'); ?>        </a>
         </div>
 
+
+        <?php Pjax::begin(['id' => 'appointment-schedule-pjax', 'timeout' => false, 'enablePushState' => true, 'clientOptions' => ['method' => 'GET']]); ?>
         <!-- Row -->
         <div class="row">
             <div class="col-xl-12">
+                <?= $this->render('_search', ['model' => $searchModel]); ?>
                 <section class="hk-sec-wrapper index">
-
-                    <?php Pjax::begin(['id' => 'dt-pjax', 'timeout' => false, 'enablePushState' => true, 'clientOptions' => ['method' => 'GET']]); ?>
                     <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key .
                         '-index']) ?>
                     <div class="row">
@@ -96,21 +97,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'columns' => [
                                             [
-                                                'class' => 'yii\grid\SerialColumn',
-                                                'header' => 'STT',
-                                                'headerOptions' => [
-                                                    'width' => 60,
-                                                    'rowspan' => 2
-                                                ],
-                                                'filterOptions' => [
-                                                    'class' => 'd-none',
-                                                ],
-                                            ],
-                                            [
                                                 'class' => 'yii\grid\ActionColumn',
                                                 'header' => Yii::t('backend', 'Actions'),
                                                 'template' => '{update} {delete}',
                                                 'buttons' => [
+                                                    'create-order' => function ($url, $model) {
+                                                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                                            'title' => Yii::t('backend', 'Tạo đơn hàng'),
+                                                            'alia-label' => Yii::t('backend', 'Tạo đơn hàng'),
+                                                            'data-pjax' => 0,
+                                                            'class' => 'btn btn-info btn-xs'
+                                                        ]);
+                                                    },
                                                     'update' => function ($url, $model) {
                                                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                                                             'title' => Yii::t('backend', 'Update'),
@@ -139,48 +137,71 @@ $this->params['breadcrumbs'][] = $this->title;
                                             [
                                                 'attribute' => 'title',
                                                 'format' => 'raw',
+                                                'headerOptions' => ['class' => 'header-300'],
                                                 'value' => function ($model) {
-                                                    return Html::a($model->title, ['view', 'id' => $model->id], [
-                                                        'title' => $model->title,
-                                                        'data-pjax' => 0,
-                                                    ]);
+                                                    $content = '<strong>Tiêu đề:</strong> ' . Html::a($model->title, ['view', 'id' => $model->id], [
+                                                            'title' => $model->title,
+                                                            'data-pjax' => 0,
+                                                        ]) . '<br/>';
+                                                    $content .= '<strong>KH:</strong> ' . $model->getDisplayRelatedField('customer_id', 'customer', 'customer', 'fullname') . ' - ' . $model->customer->code . '<br/>';
+                                                    $content .= '<strong>Cơ sở:</strong> ' . $model->getDisplayRelatedField('co_so_id', 'coSo', 'co-so');
+
+                                                    return $content;
                                                 }
                                             ],
                                             [
-                                                'attribute' => 'customer_id',
+                                                'label' => Yii::t('backend', 'Thông tin hẹn'),
+                                                'headerOptions' => ['class' => 'header-300'],
                                                 'format' => 'raw',
-                                                'value' => function ($model) {
-                                                    return Html::a($model->customer->fullname, Url::toRoute(['/iway/customer/view', 'id' => $model->customer_id]));
+                                                'value' => function (\modava\iway\models\AppointmentSchedule $model) {
+                                                    $content = '<strong>Ngày hẹn:</strong> ' . Utils::convertDateTimeToDisplayFormat($model->start_time) . '<br/>';
+                                                    $content .= '<strong>Tình trạng: </strong>' . $model->getDisplayDropdown($model->status, 'status') . '<br/>';
+                                                    switch ($model->status) {
+                                                        case 'den';
+                                                            $moreInfo = '<strong>Dịch vụ quan tâm: </strong>' . $model->getDisplayDropdown($model->accept_for_service, 'accept_for_service') . '<br/>';
+                                                            $moreInfo .= '<strong>Ngày đến: </strong>' . Utils::convertDateTimeToDisplayFormat($model->check_in_time) . '<br/>';
+                                                            break;
+                                                        case 'doi_lich';
+                                                            $moreInfo = '<strong>Lịch mới: </strong>' . $model->getDisplayRelatedField('new_appointment_schedule_id', 'newAppointmentSchedule', 'appointment-schedule') . ' (' . Utils::convertDateTimeToDisplayFormat($model->newAppointmentSchedule->start_time) . ')<br/>';
+                                                            break;
+                                                        default:
+                                                            $moreInfo = '';
+                                                            break;
+                                                    }
+
+                                                    $moreInfo .= '<strong>Ghi chú của Online: </strong>' . $model->description;
+                                                    return $content . $moreInfo;
                                                 }
                                             ],
-                                            [
-                                                'attribute' => 'co_so_id',
-                                                'format' => 'raw',
-                                                'value' => function ($model) {
-                                                    return Html::a($model->coSo->title, Url::toRoute(['/iway/co-so/view', 'id' => $model->customer_id]));
-                                                }
-                                            ],
-                                            'start_time:datetime',
                                             [
                                                 'attribute' => 'status_service',
+                                                'format' => 'raw',
+                                                'headerOptions' => [
+                                                    'class' => 'header-200',
+                                                ],
                                                 'value' => function ($model) {
-                                                    return $model->getDisplayDropdown($model->status_service, 'status_service');
+                                                    $content = $model->getDisplayDropdown($model->status_service, 'status_service') . '<br/>';
+                                                    if ($model->status_service == 'khong_dong_y_lam') {
+                                                        $content .= '<strong>Lý do Fail: </strong>' . $model->getDisplayDropdown($model->reason_fail, 'reason_fail');
+                                                    }
+                                                    return $content;
                                                 }
                                             ],
                                             [
-                                                'attribute' => 'accept_for_service',
-                                                'value' => function ($model) {
-                                                    return $model->getDisplayDropdown($model->accept_for_service, 'accept_for_service');
+                                                'label' => Yii::t('backend', 'Thông tin thêm'),
+                                                'format' => 'raw',
+                                                'headerOptions' => [
+                                                    'class' => 'header-300',
+                                                ],
+                                                'value' => function (\modava\iway\models\AppointmentSchedule $model) {
+                                                    $content = '<strong>Direct Sales: </strong> ' . ($model->direct_sales_id ? $model->directSales->userProfile->fullname : '') . '<br/>';
+                                                    $content .= '<strong>Ghi Chú Direct Sales: </strong> ' . $model->direct_sales_note . '<br/>';
+                                                    $content .= '<strong>Bác sĩ thăm khám: </strong> ' . ($model->doctor_thamkham_id ? $model->doctorThamkham->userProfile->fullname : '') . '<br/>';
+                                                    $content .= '<strong>Ghi Chú Bác sĩ thăm khám: </strong> ' . $model->doctor_thamkham_note . '<br/>';
+
+                                                    return $content;
                                                 }
                                             ],
-                                            [
-                                                'attribute' => 'reason_fail',
-                                                'value' => function ($model) {
-                                                    return $model->getDisplayDropdown($model->reason_fail, 'reason_fail');
-                                                }
-                                            ],
-                                            'check_in_time:datetime',
-                                            //'description:ntext',
                                             [
                                                 'attribute' => 'created_by',
                                                 'value' => 'userCreated.userProfile.fullname',
@@ -201,10 +222,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                         </div>
                     </div>
-                    <?php Pjax::end(); ?>
                 </section>
             </div>
         </div>
+        <?php Pjax::end(); ?>
     </div>
 <?php
 $urlChangePageSize = \yii\helpers\Url::toRoute(['perpage']);

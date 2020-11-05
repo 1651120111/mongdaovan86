@@ -1,13 +1,14 @@
 <?php
 
 use backend\widgets\ToastrWidget;
+use common\grid\MyGridView;
 use modava\affiliate\helpers\Utils;
 use modava\affiliate\widgets\DropdownWidget;
 use modava\affiliate\widgets\JsUtils;
 use modava\affiliate\widgets\NavbarWidgets;
-use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel modava\affiliate\models\search\CustomerSearch */
@@ -36,35 +37,41 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-xl-12">
                 <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-                <section class="hk-sec-wrapper">
+                <section class="hk-sec-wrapper index">
 
-                    <?php //Pjax::begin(['enablePushState' => false, 'id' => 'customer-index']); ?>
+                    <?php Pjax::begin(['id' => 'dt-pjax', 'timeout' => false, 'enablePushState' => true, 'clientOptions' => ['method' => 'GET']]); ?>
                     <div class="row">
                         <div class="col-sm">
                             <div class="table-wrap">
                                 <div class="dataTables_wrapper dt-bootstrap4 table-responsive">
-                                    <?= GridView::widget([
+                                    <?= MyGridView::widget([
                                         'dataProvider' => $dataProvider,
                                         'layout' => '
-                                        {errors}
-                                        <div class="row">
-                                            <div class="col-sm-12">
+                                            {errors}
+                                            <div class="pane-single-table">
                                                 {items}
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" role="status" aria-live="polite">
-                                                    {pager}
-                                                </div>
+                                            <div class="pager-wrap clearfix">
+                                                {summary}' .
+                                            Yii::$app->controller->renderPartial('@backend/views/layouts/my-gridview/_pageTo', [
+                                                'totalPage' => $totalPage,
+                                                'currentPage' => Yii::$app->request->get($dataProvider->getPagination()->pageParam)
+                                            ]) .
+                                            Yii::$app->controller->renderPartial('@backend/views/layouts/my-gridview/_pageSize') .
+                                            '{pager}
                                             </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers">
-                                                    {summary}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ',
+                                        ',
+                                        'tableOptions' => [
+                                            'id' => 'dataTable',
+                                            'class' => 'dt-grid dt-widget pane-hScroll',
+                                        ],
+                                        'myOptions' => [
+                                            'class' => 'dt-grid-content my-content pane-vScroll',
+                                            'data-minus' => '{"0":95,"1":".hk-navbar","2":".nav-tabs","3":".hk-pg-header","4":".hk-footer-wrap","5":"#customer-search"}'
+                                        ],
+                                        'summaryOptions' => [
+                                            'class' => 'summary pull-right',
+                                        ],
                                         'pager' => [
                                             'firstPageLabel' => Yii::t('backend', 'First'),
                                             'lastPageLabel' => Yii::t('backend', 'Last'),
@@ -74,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                             'options' => [
                                                 'tag' => 'ul',
-                                                'class' => 'pagination',
+                                                'class' => 'pagination pull-left',
                                             ],
 
                                             // Customzing CSS class for pager link
@@ -84,10 +91,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'pageCssClass' => 'page-item',
 
                                             // Customzing CSS class for navigating link
-                                            'prevPageCssClass' => 'paginate_button page-item',
-                                            'nextPageCssClass' => 'paginate_button page-item',
-                                            'firstPageCssClass' => 'paginate_button page-item',
-                                            'lastPageCssClass' => 'paginate_button page-item',
+                                            'prevPageCssClass' => 'paginate_button page-item prev',
+                                            'nextPageCssClass' => 'paginate_button page-item next',
+                                            'firstPageCssClass' => 'paginate_button page-item first',
+                                            'lastPageCssClass' => 'paginate_button page-item last',
                                         ],
                                         'columns' => [
                                             [
@@ -105,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'class' => 'yii\grid\ActionColumn',
                                                 'header' => Yii::t('backend', 'Actions'),
                                                 'template' => DropdownWidget::widget([
-                                                        'title' => Yii::t('t', 'Hành động'),
+                                                        'title' => Yii::t('backend', 'Hành động'),
                                                         'dropdowns' => [
                                                             '{create-coupon}',
                                                             '{create-call-note}',
@@ -119,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             'class' => 'btn-success btn-sm fs-12'
                                                         ]
                                                     ]) . DropdownWidget::widget([
-                                                        'title' => Yii::t('t', 'DS liên quan'),
+                                                        'title' => Yii::t('backend', 'DS liên quan'),
                                                         'dropdowns' => [
                                                             '{list-coupon}',
                                                             '{list-note}',
@@ -132,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     ]),
                                                 'buttons' => [
                                                     'update' => function ($url, $model) {
-                                                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>' . ' ' . Yii::t('affiliate', 'Cập nhật'), $url, [
+                                                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>' . ' ' . Yii::t('backend', 'Cập nhật'), $url, [
                                                             'title' => Yii::t('backend', 'Update'),
                                                             'alia-label' => Yii::t('backend', 'Update'),
                                                             'data-pjax' => 0,
@@ -140,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         ]);
                                                     },
                                                     'delete' => function ($url, $model) {
-                                                        return Html::a('<span class="glyphicon glyphicon-trash"></span>' . ' ' . Yii::t('affiliate', 'Xóa'), 'javascript:;', [
+                                                        return Html::a('<span class="glyphicon glyphicon-trash"></span>' . ' ' . Yii::t('backend', 'Xóa'), 'javascript:;', [
                                                             'title' => Yii::t('backend', 'Delete'),
                                                             'class' => 'btn btn-danger btn-xs btn-del m-1',
                                                             'data-title' => Yii::t('backend', 'Delete?'),
@@ -154,7 +161,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'create-coupon' => function ($url, $model) {
                                                         if (!Utils::isReleaseObject('Coupon')) return '';
 
-                                                        return Html::a('<i class="icon dripicons-ticket"></i>' . ' ' . Yii::t('affiliate', 'Tạo Coupon'), 'javascript:;', [
+                                                        return Html::a('<i class="icon dripicons-ticket"></i>' . ' ' . Yii::t('backend', 'Tạo Coupon'), 'javascript:;', [
                                                             'title' => Yii::t('backend', 'Create Coupon'),
                                                             'alia-label' => Yii::t('backend', 'Create Coupon'),
                                                             'data-pjax' => 0,
@@ -163,7 +170,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         ]);
                                                     },
                                                     'create-call-note' => function ($url, $model) {
-                                                        return Html::a('<i class="icon dripicons-to-do"></i>' . ' ' . Yii::t('affiliate', 'Tạo Note cuộc gọi'), 'javascript:;', [
+                                                        return Html::a('<i class="icon dripicons-to-do"></i>' . ' ' . Yii::t('backend', 'Tạo Note cuộc gọi'), 'javascript:;', [
                                                             'title' => Yii::t('backend', 'Create Call Note'),
                                                             'alia-label' => Yii::t('backend', 'Create Call Note'),
                                                             'data-pjax' => 0,
@@ -172,7 +179,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         ]);
                                                     },
                                                     'create-feedback' => function ($url, $model) {
-                                                        return Html::a('<span class="material-icons" style="font-size: 12px">feedback</span>' . ' ' . Yii::t('affiliate', 'Tạo FeedBack'), 'javascript:;', [
+                                                        return Html::a('<span class="material-icons" style="font-size: 12px">feedback</span>' . ' ' . Yii::t('backend', 'Tạo FeedBack'), 'javascript:;', [
                                                             'title' => Yii::t('backend', 'Create Feedback'),
                                                             'alia-label' => Yii::t('backend', 'Create Feedback'),
                                                             'data-pjax' => 0,
@@ -277,10 +284,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ],
                                             [
                                                 'attribute' => 'birthday',
-                                                'format' => 'date',
+                                                'format' => 'raw',
                                                 'headerOptions' => [
-                                                    'class' => 'header-100',
+                                                    'class' => 'header-200',
                                                 ],
+                                                'value' => function ($model) {
+                                                    $content = "<strong>Ngày sinh: </strong>" . ($model->birthday ? Yii::$app->formatter->asDate($model->birthday) : '') . "<br/>";
+                                                    $content .= "<strong>CMND/CTCD: </strong>" . $model->id_card_number . "<br/>";
+                                                    $content .= "<strong>Phương thức chuyển khoản HH: </strong>" . ($model->payment_type ? Yii::$app->getModule('affiliate')->params['customer_payment_type'][$model->payment_type] : '') . "<br/>";
+                                                    return $content;
+                                                }
                                             ],
                                             //'description:ntext',
                                             [
@@ -298,6 +311,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ],
                                             ],
                                         ],
+                                        'rowOptions' => function ($model) {
+                                            if ($model->isUnsatisfied()) {
+                                                return ['class' => 'bg-danger'];
+                                            }
+                                        },
                                     ]); ?>
                                 </div>
                             </div>
@@ -310,6 +328,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 <?= JsUtils::widget() ?>
 <?php
+$urlChangePageSize = \yii\helpers\Url::toRoute(['perpage']);
 $script = <<< JS
 $('body').on('click', '.success-delete', function(e){
     e.preventDefault();
@@ -318,6 +337,11 @@ $('body').on('click', '.success-delete', function(e){
         $.post(url);
     }
     return false;
+});
+var customPjax = new myGridView();
+    customPjax.init({
+    pjaxId: '#dt-pjax',
+    urlChangePageSize: '$urlChangePageSize',
 });
 
 $('.create-coupon').on('click', function() {

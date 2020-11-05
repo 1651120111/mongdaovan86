@@ -44,11 +44,11 @@
     <div class="row">
         <div class="col-sm-6 mb-10">
             <div class="custom-control custom-radio pull-left mr-15">
-                <input type="radio" id="customRadio1" class="custom-control-input">
+                <input type="radio" name="gender" id="customRadio1" class="custom-control-input">
                 <label class="custom-control-label" for="customRadio1">Nam</label>
             </div>
             <div class="custom-control custom-radio pull-left">
-                <input checked="" type="radio" id="customRadio2" class="custom-control-input">
+                <input checked="" name="gender" type="radio" id="customRadio2" class="custom-control-input">
                 <label class="custom-control-label" for="customRadio2">Nữ</label>
             </div>
         </div>
@@ -367,7 +367,57 @@
     </div>
 
     <div class="row mb-10 mx-0">
-        <h4 class="text-primary">1. Chỉ định điều trị:</h4>
+        <h4 class="text-primary">1. Vị trí răng cửa hàm trên:</h4>
+    </div>
+    <div class="row mt-15">
+        <label class="col-lg-3 col-formlabel">- Nghiêng:</label>
+        <div class="col-lg-9">
+            <textarea name="position_maxillary_incisors_inclined" rows="2"
+                      class="md-full form-control"></textarea>
+        </div>
+    </div>
+    <div class="row mt-15">
+        <label class="col-lg-3 col-formlabel">- Trước sau:</label>
+        <div class="col-lg-9">
+            <textarea name="position_maxillary_incisors_front_behind" rows="2"
+                      class="md-full form-control"></textarea>
+        </div>
+    </div>
+    <div class="row mt-15">
+        <label class="col-lg-3 col-formlabel">- Chiều đứng:</label>
+        <div class="col-lg-9">
+            <textarea name="position_maxillary_incisors_vertical" rows="2"
+                      class="md-full form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="row mb-10 mx-0">
+        <h4 class="text-primary">2. Vị trí răng cửa hàm dưới:</h4>
+    </div>
+    <div class="row mt-15">
+        <label class="col-lg-3 col-formlabel">- Nghiêng:</label>
+        <div class="col-lg-9">
+            <textarea name="position_lower_incisors_inclined" rows="2"
+                      class="md-full form-control"></textarea>
+        </div>
+    </div>
+    <div class="row mt-15">
+        <label class="col-lg-3 col-formlabel">- Trước sau:</label>
+        <div class="col-lg-9">
+            <textarea name="position_lower_incisors_front_behind" rows="2"
+                      class="md-full form-control"></textarea>
+        </div>
+    </div>
+    <div class="row mt-15">
+        <label class="col-lg-3 col-formlabel">- Chiều đứng:</label>
+        <div class="col-lg-9">
+            <textarea name="position_lower_incisors_vertical" rows="2"
+                      class="md-full form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="row mb-10 mx-0">
+        <h4 class="text-primary">3. Chỉ định điều trị:</h4>
     </div>
     <div class="row mb-10 mx-0">
         <div class="custom-control custom-checkbox pull-left">
@@ -383,7 +433,7 @@
                    class="custom-control-input setCheckboxYcommand" id="arch_to_treat_2">
             <label class="custom-control-label v-a-m" for="arch_to_treat_2">Hàm trên</label>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" name="arch_to_treat[]" value="3"
                        class="custom-control-input setCheckboxYcommand" id="arch_to_treat_3">
@@ -391,7 +441,7 @@
                     Mẫu hàm chẩn đoán hàm đối diện</label>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" name="arch_to_treat[]" value="4"
                        class="custom-control-input setCheckboxYcommand" id="arch_to_treat_4">
@@ -399,7 +449,7 @@
                     làm gì hàm dưới</label>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" name="arch_to_treat[]" value="5"
                        class="custom-control-input setCheckboxYcommand" id="arch_to_treat_5">
@@ -416,7 +466,7 @@
                    class="custom-control-input setCheckboxYcommand" id="arch_to_treat_6">
             <label class="custom-control-label v-a-m" for="arch_to_treat_6">Hàm dưới</label>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" name="arch_to_treat[]" value="7"
                        class="custom-control-input setCheckboxYcommand" id="arch_to_treat_7">
@@ -424,7 +474,7 @@
                     diện</label>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" name="arch_to_treat[]" value="8"
                        class="custom-control-input setCheckboxYcommand" id="arch_to_treat_8">
@@ -432,7 +482,7 @@
                     làm gì hàm dưới</label>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" name="arch_to_treat[]" value="9"
                        class="custom-control-input setCheckboxYcommand" id="arch_to_treat_9">
@@ -444,7 +494,7 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">2. Giới hạn sự
+        <h4 class="text-primary">4. Giới hạn sự
             dịch
             chuyển của các răng (Ví dụ: Cầu răng, răng cứng khớp,
             implants,...)</h4>
@@ -453,7 +503,7 @@
         <div class="custom-control custom-checkbox pull-left">
             <input type="checkbox" name="tooth_movement_retrictions[]" value="1"
                    class="custom-control-input setCheckboxYcommand" id="tooth_movement_retrictions_01">
-            <label class="custom-control-label v-a-m" for="tooth_movement_retrictions_01">NKhông (có
+            <label class="custom-control-label v-a-m" for="tooth_movement_retrictions_01">Không (có
                 thể dịch chuyển tất cả các răng)</label>
         </div>
     </div>
@@ -466,12 +516,12 @@
         </div>
     </div>
     <div class="row mb-10 mx-0">
-        <div class="w-100">
+        <div class="w-100 mb-10">
             <div class="table-responsive">
-                <table id="default-datatable" class="display table table-striped table-bordered td-height-40 mb-0">
+                <table id="default-datatable1" class="display table table-striped table-bordered td-height-40 mb-0">
                     <tbody>
                     <tr>
-                        <td class="rotate-90" rowspan="4">
+                        <td class="" rowspan="4">
                             <span>R (Phải)</span>
                         </td>
                         <td>
@@ -806,7 +856,7 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">3. Gắn Attachments (Để chỉ định
+        <h4 class="text-primary">5. Gắn Attachments (Để chỉ định
             attachments, vui lòng xem phần Clinical
             Preferences)</h4>
     </div>
@@ -829,13 +879,12 @@
         </div>
     </div>
     <div class="row mb-10 mx-0">
-        <div class="card-body">
+        <div class="w-100">
             <div class="table-responsive">
-                <table id="default-datatable" class="display table table-striped table-bordered td-height-40">
-
+                <table id="default-datatable2" class="display table table-striped table-bordered td-height-40 mb-0">
                     <tbody>
                     <tr>
-                        <td class="rotate-90" rowspan="4">
+                        <td class="" rowspan="4">
                             <span>R (Phải)</span>
                         </td>
                         <td>
@@ -1111,12 +1160,12 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">4. Tương quan theo chiều trước sau:</h4>
+        <h4 class="text-primary">6. Tương quan theo chiều trước sau:</h4>
     </div>
     <div class="row mb-10 mx-0">
-        <div class="card-body">
+        <div class="w-100">
             <div class="table-responsive">
-                <table id="default-datatable"
+                <table id="default-datatable3"
                        class="display table table-striped table-bordered table-td-center mb-0">
                     <thead>
                     <tr>
@@ -1218,7 +1267,7 @@
         </div>
         <p class="l-h-1c8">&nbsp;(Nếu lựa chọn nhiều hơn 1 chỉ định dưới đây thì chỉ định số lượng và trình tự
             tại mục Chỉ định đặc biệt)</p>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand"
                        name="anterior_posterior[]" value="10" id="anterior_posterior_tooth_movement2">
@@ -1226,7 +1275,7 @@
                     sau</label>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand"
                        name="anterior_posterior[]" value="11" id="anterior_posterior_tooth_movement">
@@ -1234,7 +1283,7 @@
                     II/III (Cần thêm khí cụ hỗ trợ carrier và thun hạng II)</label>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand"
                        name="anterior_posterior[]" value="12" id="anterior_posterior_tooth_movement4">
@@ -1242,7 +1291,7 @@
                     tự</label>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand"
                        name="anterior_posterior[]" value="13" id="anterior_posterior_tooth_movement5">
@@ -1257,7 +1306,7 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">5. Overjet</h4>
+        <h4 class="text-primary">7. Overjet</h4>
     </div>
     <div class="row mb-10 mx-0">
         <div class="custom-control custom-checkbox pull-left">
@@ -1284,7 +1333,7 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">6. Cắn sâu, cắn hở</h4>
+        <h4 class="text-primary">8. Cắn sâu, cắn hở</h4>
     </div>
     <div class="row mb-10 mx-0">
         <div class="custom-control custom-checkbox pull-left">
@@ -1308,13 +1357,13 @@
                    id="overjet6">
             <label class="custom-control-label v-a-m" for="overjet6">Điều chỉnh cắn hở</label>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox ml-15">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="overbite[]"
                        value="4" id="overjet7">
                 <label class="custom-control-label v-a-m" for="overjet7">Chỉ làm trồi răng phía trước</label>
             </div>
-            <div class="md-full pl-40 mt-0">
+            <div class="md-full pl-40 mt-10">
                 <div class="md-full">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="5"
@@ -1322,7 +1371,7 @@
                         <label class="custom-control-label v-a-m" for="overjet8">Hàm trên</label>
                     </div>
                 </div>
-                <div class="md-full">
+                <div class="md-full mt-5">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="6"
                                class="custom-control-input setCheckboxYcommand" id="overjet9">
@@ -1330,13 +1379,13 @@
                     </div>
                 </div>
             </div>
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-5">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="overbite[]"
                        value="7" id="overjet10">
                 <label class="custom-control-label v-a-m" for="overjet10">Làm trồi răng phía trước và làm lún
                     răng phía sau</label>
             </div>
-            <div class="md-full pl-40 mt-0">
+            <div class="md-full pl-40 mt-10">
                 <div class="md-full">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="8"
@@ -1344,7 +1393,7 @@
                         <label class="custom-control-label v-a-m" for="overjet11">Hàm trên</label>
                     </div>
                 </div>
-                <div class="md-full">
+                <div class="md-full mt-5">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="9"
                                class="custom-control-input setCheckboxYcommand" id="overjet12">
@@ -1352,7 +1401,7 @@
                     </div>
                 </div>
             </div>
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-5">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="overbite[]"
                        value="10" id="overjet13">
                 <label class="custom-control-label v-a-m" for="overjet13">Những chỉ định đặc biệt khác như phẫu
@@ -1367,13 +1416,13 @@
                    id="overjet14">
             <label class="custom-control-label v-a-m" for="overjet14">Điều chỉnh cắn sâu</label>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox ml-15">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="overbite[]"
                        value="12" id="overjet15">
                 <label class="custom-control-label v-a-m" for="overjet15">Chỉ làm lún răng phía trước</label>
             </div>
-            <div class="md-full pl-40 mt-0">
+            <div class="md-full pl-40 mt-10">
                 <div class="md-full">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="13"
@@ -1381,7 +1430,7 @@
                         <label class="custom-control-label v-a-m" for="overjet16">Hàm trên</label>
                     </div>
                 </div>
-                <div class="md-full">
+                <div class="md-full mt-5">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="14"
                                class="custom-control-input setCheckboxYcommand" id="overjet17">
@@ -1389,13 +1438,13 @@
                     </div>
                 </div>
             </div>
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-5">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="overbite[]"
                        value="15" id="overjet18">
                 <label class="custom-control-label v-a-m" for="overjet18">Làm lún răng phía trước và làm trồi
                     răng phía sau</label>
             </div>
-            <div class="md-full pl-40 mt-0">
+            <div class="md-full pl-40 mt-10">
                 <div class="md-full">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="16"
@@ -1403,7 +1452,7 @@
                         <label class="custom-control-label v-a-m" for="overjet19">Hàm trên</label>
                     </div>
                 </div>
-                <div class="md-full">
+                <div class="md-full mt-5">
                     <div class="custom-control custom-checkbox pull-left">
                         <input type="checkbox" name="overbite[]" value="17"
                                class="custom-control-input setCheckboxYcommand" id="overjet20">
@@ -1411,7 +1460,7 @@
                     </div>
                 </div>
             </div>
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-5">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="overbite[]"
                        value="18" id="overjet21">
                 <label class="custom-control-label v-a-m" for="overjet21">Những chỉ định đặc biệt khác như phẫu
@@ -1421,7 +1470,7 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">7. Gờ được thiết kế ở mặt trong trên khay của răng cửa,răng nanh hàm trên để
+        <h4 class="text-primary">9. Gờ được thiết kế ở mặt trong trên khay của răng cửa,răng nanh hàm trên để
             nâng khớp cắn</h4>
     </div>
     <div class="row mb-10 mx-0">
@@ -1438,7 +1487,7 @@
             <label class="custom-control-label v-a-m" for="overjet23">Đặt Bite Ramps ở những răng hàm
                 trên</label>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-10">
             <div class="custom-control custom-checkbox pull-left ml-15">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="bite_ramps[]"
                        value="3" id="overjet24">
@@ -1447,12 +1496,12 @@
             <p class="l-h-1c6">&nbsp;Chú ý: vị trí đặt Bite Ramps sẽ làm lún các răng phía trước hàm trên (khu
                 vực tạo lực).</p>
             <div class="clearfix"></div>
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="bite_ramps[]"
                        value="4" id="overjet25">
                 <label class="custom-control-label v-a-m" for="overjet25">Răng cửa giữa</label>
             </div>
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="bite_ramps[]"
                        value="5" id="overjet26">
                 <label class="custom-control-label v-a-m" for="overjet26">Răng cửa bên</label>
@@ -1468,7 +1517,7 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">8. Đường giữa</h4>
+        <h4 class="text-primary">10. Đường giữa</h4>
     </div>
     <div class="row mb-10 mx-0">
         <div class="custom-control custom-checkbox pull-left">
@@ -1490,48 +1539,49 @@
         <div class="custom-control custom-checkbox pull-left">
             <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="midline[]" value="3"
                    id="overjet30">
-            <label class="custom-control-label v-a-m" for="overjet30">Improve midline with IPR/ Cải
+            <label class="custom-control-label v-a-m" for="overjet30">Cải
                 thiện đường giữa với mài kẽ</label>
         </div>
         <div class="col-lg-12">
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="midline[]"
                        value="4" id="overjet31">
-                <label class="custom-control-label v-a-m" for="overjet31">Upper/Hàm trên</label>
+                <label class="custom-control-label v-a-m" for="overjet31">Hàm trên</label>
             </div>
-            <div class="custom-control custom-checkbox ml-40">
+            <div class="custom-control custom-checkbox ml-40 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="midline[]"
                        value="5" id="overjet32">
-                <label class="custom-control-label v-a-m" for="overjet32">To patient’s right/Chỉnh về
+                <label class="custom-control-label v-a-m" for="overjet32">Chỉnh về
                     phía bên phải của bệnh nhân</label>
             </div>
-            <div class="custom-control custom-checkbox ml-40">
+            <div class="custom-control custom-checkbox ml-40 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="midline[]"
                        value="6" id="midline1">
-                <label class="custom-control-label v-a-m" for="midline1">To patient’s left/Chỉnh về
+                <label class="custom-control-label v-a-m" for="midline1">Chỉnh về
                     phía bên trái của bệnh nhân</label>
             </div>
-            <div class="custom-control custom-checkbox ml-15">
+            <div class="custom-control custom-checkbox ml-15 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="midline[]"
                        value="7" id="midline2">
-                <label class="custom-control-label v-a-m" for="midline2">Lower/Hàm dưới</label>
+                <label class="custom-control-label v-a-m" for="midline2">Hàm dưới</label>
             </div>
-            <div class="custom-control custom-checkbox ml-40">
+            <div class="custom-control custom-checkbox ml-40 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="midline[]"
                        value="8" id="midline3">
-                <label class="custom-control-label v-a-m" for="midline3">To patient’s right/Chỉnh về
+                <label class="custom-control-label v-a-m" for="midline3">Chỉnh về
                     phía bên phải của bệnh nhân</label>
             </div>
-            <div class="custom-control custom-checkbox ml-40">
+            <div class="custom-control custom-checkbox ml-40 mt-10">
                 <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="midline[]"
                        value="9" id="midline4">
-                <label class="custom-control-label v-a-m" for="midline4">To patient’s left/Chỉnh về
+                <label class="custom-control-label v-a-m" for="midline4">Chỉnh về
                     phía bên trái của bệnh nhân</label>
             </div>
         </div>
     </div>
+
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">9. Cắn chéo phía sau (nếu có)</h4>
+        <h4 class="text-primary">11. Cắn chéo phía sau (nếu có)</h4>
     </div>
     <div class="row mb-10 mx-0">
         <div class="custom-control custom-checkbox pull-left">
@@ -1547,8 +1597,9 @@
             <label class="custom-control-label v-a-m" for="midline6">Điều chỉnh</label>
         </div>
     </div>
+
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">10. Spacing &amp; Crowding (Arch Length
+        <h4 class="text-primary">12. Spacing &amp; Crowding (Arch Length
             Discrepancy)(chen chúc và thưa kẽ)</h4>
     </div>
     <div class="row mb-0 mx-0">
@@ -1558,14 +1609,14 @@
             <label class="custom-control-label v-a-m" for="spacing_crowding1">Răng thưa kẽ</label>
         </div>
     </div>
-    <div class="row mb-0 ml-15">
+    <div class="row mb-0 ml-15 mt-10">
         <div class="custom-control custom-checkbox pull-left">
             <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="spacing_crowding[]"
                    value="2" id="spacing_crowding2">
             <label class="custom-control-label v-a-m" for="spacing_crowding2">Đóng tất cả các khoảng</label>
         </div>
     </div>
-    <div class="row mb-10 ml-15">
+    <div class="row mb-10 ml-15 mt-10">
         <div class="custom-control custom-checkbox pull-left">
             <input type="checkbox" class="custom-control-input setCheckboxYcommand" name="spacing_crowding[]"
                    value="3" id="spacing_crowding3">
@@ -1587,34 +1638,34 @@
     <div class="row mb-10 mx-0">
         <div class="card-body py-0">
             <div class="table-responsive">
-                <table id="default-datatable"
+                <table id="default-datatable4"
                        class="display table table-striped table-bordered table-td-center">
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Ưu tiên</th>
-                        <th>Khi cần thiết</th>
-                        <th>Không</th>
+                        <th class="text-center">Ưu tiên</th>
+                        <th class="text-center">Khi cần thiết</th>
+                        <th class="text-center">Không</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>Nong rộng</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="1"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper11">
                                 <label class="custom-control-label" for="resolve_upper11"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="2"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper12">
                                 <label class="custom-control-label" for="resolve_upper12"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="3"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper1356">
@@ -1624,21 +1675,21 @@
                     </tr>
                     <tr>
                         <td>Nghiêng răng</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="4"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper13">
                                 <label class="custom-control-label" for="resolve_upper13"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="5"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper21">
                                 <label class="custom-control-label" for="resolve_upper21"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input setCheckboxYcommand"
                                        name="resolve_upper[]" value="6" id="resolve_upper22">
@@ -1649,21 +1700,21 @@
                     <tr>
                         <td>Mài kẽ răng phía trước
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="7"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper31">
                                 <label class="custom-control-label" for="resolve_upper31"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="8"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper32">
                                 <label class="custom-control-label" for="resolve_upper32"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="9"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper33">
@@ -1673,21 +1724,21 @@
                     </tr>
                     <tr>
                         <td>Mài kẽ răng sau bên phải</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="10"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper41">
                                 <label class="custom-control-label" for="resolve_upper41"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="11"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper42">
                                 <label class="custom-control-label" for="resolve_upper42"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="12"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper43">
@@ -1697,21 +1748,21 @@
                     </tr>
                     <tr>
                         <td>Mài kẽ răng sau bên trái</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="13"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper51">
                                 <label class="custom-control-label" for="resolve_upper51"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="14"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper52">
                                 <label class="custom-control-label" for="resolve_upper52"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_upper[]" value="15"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_upper53">
@@ -1731,34 +1782,34 @@
     <div class="row mb-10 mx-0">
         <div class="card-body py-0">
             <div class="table-responsive">
-                <table id="default-datatable"
+                <table id="default-datatable6"
                        class="display table table-striped table-bordered table-td-center">
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Ưu tiên</th>
-                        <th>Khi cần thiết</th>
-                        <th>Không</th>
+                        <th class="text-center">Ưu tiên</th>
+                        <th class="text-center">Khi cần thiết</th>
+                        <th class="text-center">Không</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>Nong rộng</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="1"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower11">
                                 <label class="custom-control-label" for="resolve_lower11"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="2"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower12">
                                 <label class="custom-control-label" for="resolve_lower12"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="3"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower13">
@@ -1768,21 +1819,21 @@
                     </tr>
                     <tr>
                         <td>Nghiêng răng</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="4"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower21">
                                 <label class="custom-control-label" for="resolve_lower21"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="5"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower22">
                                 <label class="custom-control-label" for="resolve_lower22"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="6"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower23">
@@ -1793,21 +1844,21 @@
                     <tr>
                         <td>Mài kẽ răng phía trước
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="7"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower31">
                                 <label class="custom-control-label" for="resolve_lower31"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="8"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower32">
                                 <label class="custom-control-label" for="resolve_lower32"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="9"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower33">
@@ -1817,21 +1868,21 @@
                     </tr>
                     <tr>
                         <td>Mài kẽ răng sau bên phải</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="10"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower41">
                                 <label class="custom-control-label" for="resolve_lower41"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="11"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower42">
                                 <label class="custom-control-label" for="resolve_lower42"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="12"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower416">
@@ -1841,21 +1892,21 @@
                     </tr>
                     <tr>
                         <td> Mài kẽ răng sau bên trái</td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="13"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower51">
                                 <label class="custom-control-label" for="resolve_lower51"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="14"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower52">
                                 <label class="custom-control-label" for="resolve_lower52"></label>
                             </div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="resolve_lower[]" value="15"
                                        class="custom-control-input setCheckboxYcommand" id="resolve_lower53">
@@ -1894,13 +1945,13 @@
     </div>
 
     <div class="row mb-10 mx-0">
-        <div class="card-body">
+        <div class="w-100">
             <div class="table-responsive">
-                <table id="default-datatable"
+                <table id="default-datatable7"
                        class="display table table-striped table-bordered td-height-40 mb-0">
                     <tbody>
                     <tr>
-                        <td class="rotate-90" rowspan="4">
+                        <td class="" rowspan="4">
                             <span>R (Phải)</span>
                         </td>
                         <td>
@@ -2240,10 +2291,10 @@
     </div>
 
     <div class="row mb-10 mt-20 mx-0">
-        <h4 class="text-primary">11. Chỉ định đặc biệt</h4>
+        <h4 class="text-primary">13. Chỉ định đặc biệt</h4>
     </div>
     <div class="row mb-10 mx-0">
-        <textarea class="form-control setInputTextYcommand h-300p" name="special_instructions"></textarea>
+        <textarea class="form-control setInputTextYcomman" name="special_instructions" rows="5"></textarea>
     </div>
 
 </form>

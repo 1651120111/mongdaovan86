@@ -6,11 +6,17 @@
  * Time: 08:58
  */
 
+use kartik\select2\Select2;
+use modava\iway\models\Order;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\JsExpression;
 
 $this->title = 'iWay';
 $this->title = Yii::t('backend', 'iWay');
 $this->params['breadcrumbs'][] = $this->title;
+
+/* @var $model modava\iway\models\Order */
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
     <!-- Title -->
@@ -22,17 +28,123 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-12 col-xl-12">
             <div class="card mb-30">
-                <div class="card-header"></div>
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-3">
+                            <?= Select2::widget([
+                                'model' => $model,
+                                'attribute' => 'order_id',
+                                'value' => $model->order_id,
+                                'initValueText' => $model->order_id ? Order::findOne($model->order_id)->title : '',
+                                'options' => [
+                                    'class' => 'load-data-on-change',
+                                    'placeholder' => Yii::t('backend', 'Chọn đơn hàng ...'),
+                                    'load-data-element' => '#treatment_id',
+                                    'load-data-url' => Url::toRoute(['treatment-schedule/get-records-by-order']),
+                                    'load-data-key' => 'order_id',
+                                    'load-data-data' => json_encode(['option_tag' => 'true']),
+                                    'load-data-method' => 'GET',
+                                    'load-data-removeemptyoption' => 'true',
+                                ],
+                                'pluginOptions' => [
+                                    'allowClear' => true,
+                                    'minimumInputLength' => 3,
+                                    'language' => [
+                                        'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+                                    ],
+                                    'ajax' => [
+                                        'url' => Url::toRoute(['/iway/order/get-by-key-word']),
+                                        'dataType' => 'json',
+                                        'delay' => 250,
+                                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                                    ],
+                                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                                    'templateResult' => new JsExpression('function(model) { return model.text; }'),
+                                    'templateSelection' => new JsExpression('function (model) { return model.text; }'),
+                                ],
+                            ]); ?>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <select class="form-control" id="treatment_id">
+                                <option value=""><?=Yii::t('backend', 'Không có liệu trình')?></option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="widgetbar">
+                                <button class="btn btn-primary md-full" data-toggle="modal" data-target=".bd-example-modal-add-lt">
+                                    <i class="feather icon-plus mr-2"></i>Thêm liệu trình
+                                </button>
+                                <div class="modal fade bd-example-modal-add-lt" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleLargeModalLabel">Thêm liệu trình</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i class="la la-close"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="card-body">
+                                                    <p class="text-primary font-16">
+                                                        Bạn chắc chắn muốn thêm mới một liệu trình mới?
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Hủy
+                                                </button>
+                                                <button type="button" class="btn btn-primary">Thêm liệu trình</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="widgetbar">
+                                <button class="btn btn-primary md-full" data-toggle="modal" data-target=".bd-example-modal-save-lt">
+                                    <i class="feather icon-plus mr-2"></i>Lưu liệu trình
+                                </button>
+                                <div class="modal fade bd-example-modal-save-lt" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleLargeModalLabel">Lưu liệu trình</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i class="la la-close"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="card-body">
+                                                    <p class="text-primary font-16">
+                                                        Bạn chắc chắn muốn lưu liệu trình này?
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Hủy
+                                                </button>
+                                                <button type="button" class="btn btn-primary">Lưu liệu trình</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <ul class="nav nav-pills justify-content-center custom-tab-button mb-3">
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-1-tab-button" data-toggle="pill" href="#pills-1-button"
+                            <a class="nav-link active" id="pills-1-tab-button" data-toggle="pill" href="#pills-1-button"
                                role="tab" aria-controls="pills-1-button" aria-selected="true"><span
                                         class="tab-btn-icon"><i class="icon-book-open"></i></span>Hồ sơ khám
                                 bệnh</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" id="pills-2-tab-button" data-toggle="pill"
+                            <a class="nav-link" id="pills-2-tab-button" data-toggle="pill"
                                href="#pills-2-button" role="tab" aria-controls="pills-2-button"
                                aria-selected="false"><span class="tab-btn-icon"><i
                                             class="icon-book-open"></i></span>Hồ sơ thiết kế</a>
@@ -57,13 +169,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent-button">
-                        <div class="tab-pane fade" id="pills-1-button" role="tabpanel"
+                        <div class="tab-pane fade active show" id="pills-1-button" role="tabpanel"
                              aria-labelledby="pills-1-tab-button">
                             <div class="card-body">
                                 <?= $this->render('ho-so-kham-benh/index') ?>
                             </div>
                         </div>
-                        <div class="tab-pane fade active show" id="pills-2-button" role="tabpanel"
+                        <div class="tab-pane fade" id="pills-2-button" role="tabpanel"
                              aria-labelledby="pills-2-tab-button">
                             <div class="card-body">
                                 <?= $this->render('ho-so-thiet-ke/index') ?>

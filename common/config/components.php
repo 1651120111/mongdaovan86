@@ -68,6 +68,7 @@ return [
         'thousandSeparator' => ',',
 //        'currencyCode' => '₫',
     ],
+<<<<<<< HEAD
     'mailer' => [
         'class' => 'yii\swiftmailer\Mailer',
         'viewPath' => '@frontend/mail',
@@ -99,3 +100,16 @@ return [
         ],
     ]
 ];
+=======
+    'commandBus' => [
+        'class' => trntv\bus\CommandBus::class,
+        'middlewares' => [
+            [
+                'class' => trntv\bus\middlewares\BackgroundCommandMiddleware::class,
+                'backgroundHandlerPath' => '@console/yii',
+                'backgroundHandlerRoute' => 'command-bus/handle',
+            ]
+        ]
+    ],
+];
+>>>>>>> master

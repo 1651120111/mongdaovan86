@@ -3,6 +3,10 @@
 namespace backend\controllers;
 
 use backend\components\MyController;
+use cheatsheet\Time;
+use common\commands\SendEmailCommand;
+use common\models\UserToken;
+use modava\auth\models\User;
 use modava\vht\SmsVht;
 use Yii;
 use yii\web\Response;

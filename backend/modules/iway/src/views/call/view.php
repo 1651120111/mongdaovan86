@@ -25,12 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
             : <?= Html::encode($this->title) ?>
         </h4>
         <p>
-            <a class="btn btn-outline-light" href="<?= Url::to(['create']); ?>"
+            <a class="btn btn-sm btn-outline-light" href="<?= Url::to(['create']); ?>"
                title="<?= Yii::t('backend', 'Create'); ?>">
                 <i class="fa fa-plus"></i> <?= Yii::t('backend', 'Create'); ?></a>
-            <?= Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
             <?= Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
+                'class' => 'btn btn-sm btn-danger',
                 'data' => [
                     'confirm' => Yii::t('backend', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'customer_id',
                             'format' => 'raw',
                             'value' => function ($model) {
-                                return Html::a($model->customer->fullname, Url::toRoute(['customer/view', 'id' => $model->customer_id]));
+                                return $model->getDisplayRelatedField('customer_id', 'customer', 'customer', 'fullname');
                             }
                         ],
                         [

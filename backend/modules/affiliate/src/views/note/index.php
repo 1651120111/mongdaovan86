@@ -2,6 +2,7 @@
 
 use backend\widgets\ToastrWidget;
 use common\grid\MyGridView;
+use modava\affiliate\helpers\Utils;
 use modava\affiliate\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -63,16 +64,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'myOptions' => [
                                             'class' => 'dt-grid-content my-content pane-vScroll',
-                                            'data-minus' => '{"0":95,"1":".hk-navbar","2":".nav-tabs","3":".hk-pg-header","4":".hk-footer-wrap"}'
+                                            'data-minus' => '{"0":115,"1":".hk-navbar","2":".nav-tabs","3":".hk-pg-header","4":".hk-footer-wrap","5":".coupon-search"}'
                                         ],
                                         'summaryOptions' => [
                                             'class' => 'summary pull-right',
                                         ],
                                         'pager' => [
-                                            'firstPageLabel' => Yii::t('receipt', 'First'),
-                                            'lastPageLabel' => Yii::t('receipt', 'Last'),
-                                            'prevPageLabel' => Yii::t('receipt', 'Previous'),
-                                            'nextPageLabel' => Yii::t('receipt', 'Next'),
+                                            'firstPageLabel' => Yii::t('backend', 'First'),
+                                            'lastPageLabel' => Yii::t('backend', 'Last'),
+                                            'prevPageLabel' => Yii::t('backend', 'Previous'),
+                                            'nextPageLabel' => Yii::t('backend', 'Next'),
                                             'maxButtonCount' => 5,
 
                                             'options' => [
@@ -113,13 +114,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             'data-pjax' => 0,
                                                         ]) . '<br/>';
 
-                                                    $content .= '<strong>Thời gian gọi: </strong>' . ($model->call_time
-                                                            ? Yii::$app->formatter->asDatetime($model->call_time)
-                                                            : '') . '<br/>';
+                                                    $content .= '<strong>Thời gian gọi: </strong>' . Utils::convertDateTimeToDisplayFormat($model->call_time) . '<br/>';
 
-                                                    $content .= '<strong>Thời gian gọi lại: </strong>' . ($model->recall_time
-                                                            ? Yii::$app->formatter->asDatetime($model->recall_time)
-                                                            : '') . '<br/>';
+                                                    $content .= '<strong>Thời gian gọi lại: </strong>' . Utils::convertDateTimeToDisplayFormat($model->recall_time) . '<br/>';
 
 
                                                     return $content;

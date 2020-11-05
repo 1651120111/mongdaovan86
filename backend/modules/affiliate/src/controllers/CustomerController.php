@@ -2,8 +2,11 @@
 
 namespace modava\affiliate\controllers;
 
+use backend\components\MyComponent;
+use modava\affiliate\models\Order;
 use modava\affiliate\models\search\CustomerPartnerSearch;
 use modava\affiliate\models\table\CustomerTable;
+use yii\data\ActiveDataProvider;
 use yii\db\Exception;
 use Yii;
 use yii\helpers\Html;
@@ -47,9 +50,12 @@ class CustomerController extends MyController
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $totalPage = $this->getTotalPage($dataProvider);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'totalPage' => $totalPage,
         ]);
     }
 
@@ -64,6 +70,13 @@ class CustomerController extends MyController
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'orderDataProvider' => $dataProvider = new ActiveDataProvider([
+                'query' => Order::getListOrderUsedCoupon($id),
+                'pagination' => [
+                    'pageSize' => 50,
+                ],
+                'sort' => ['defaultOrder' => ['id' => SORT_DESC]]
+            ])
         ]);
     }
 
@@ -179,6 +192,38 @@ class CustomerController extends MyController
         return $this->redirect(['index']);
     }
 
+    /**
+     * @param $perpage
+     */
+    public function actionPerpage($perpage)
+    {
+        MyComponent::setCookies('pageSize', $perpage);
+    }
+
+    /**
+     * @param $dataProvider
+     * @return float|int
+     */
+    public function getTotalPage($dataProvider)
+    {
+        if (MyComponent::hasCookies('pageSize')) {
+            $dataProvider->pagination->pageSize = MyComponent::getCookies('pageSize');
+        } else {
+            $dataProvider->pagination->pageSize = 10;
+        }
+
+        $pageSize = $dataProvider->pagination->pageSize;
+        $totalCount = $dataProvider->totalCount;
+        $totalPage = (($totalCount + $pageSize - 1) / $pageSize);
+
+        return $totalPage;
+    }
+
+    /**
+     * @param null $id
+     * @return array
+     * @throws NotFoundHttpException
+     */
     public function actionValidate($id = null)
     {
         if (Yii::$app->request->isAjax) {
@@ -194,6 +239,10 @@ class CustomerController extends MyController
         }
     }
 
+    /**
+     * @param null $phone
+     * @return array
+     */
     public function actionGetInfo($phone = null)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -227,6 +276,11 @@ class CustomerController extends MyController
         }
     }
 
+    /**
+     * @param null $q
+     * @param null $id
+     * @return array
+     */
     public function actionGetCustomerByKeyWord($q = null, $id = null)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -239,7 +293,10 @@ class CustomerController extends MyController
         return $out;
     }
 
-        public function actionImportKols()
+    /**
+     * @return string
+     */
+    public function actionImportKols()
     {
         $path = Yii::getAlias('@modava/affiliate/templates/kols-export.xlsx');
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
@@ -259,6 +316,22 @@ class CustomerController extends MyController
         return 'Done';
     }
 
+    /**
+     * @return Order
+     */
+    public function actionGetListOrder() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $customerId = Yii::$app->request->get('customer_id');
+        $listOrder = Order::getListOrderUsedCoupon($customerId);
+
+        return $listOrder;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
     public function actionTotalCommission($id)
     {
         $data = Customer::getTotalRevenueByCustomer($id);
