@@ -68,7 +68,4 @@ return [
     'kenne' => [
         'class' => 'modava\kenne\KenneModule',
     ],
-    'test' => [
-        'class' => 'modava\test\TestModule',
-    ],
 ];

@@ -6,7 +6,6 @@ use modava\affiliate\models\Customer;
 use modava\affiliate\widgets\JsCreateModalWidget;
 use modava\datetime\DateTimePicker;
 use modava\website\models\table\KeyValueTable;
-use modava\affiliate\widgets\JsCreateModalWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\JsExpression;
