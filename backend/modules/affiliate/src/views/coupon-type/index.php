@@ -91,7 +91,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'firstPageCssClass' => 'paginate_button page-item first',
                                             'lastPageCssClass' => 'paginate_button page-item last',
                                         ],
-<<<<<<< HEAD
                                         'columns' => [
                                             [
                                                 'class' => 'yii\grid\SerialColumn',
@@ -103,17 +102,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'filterOptions' => [
                                                     'class' => 'd-none',
                                                 ],
-=======
                                         [
                                             'attribute' => 'created_at',
-<<<<<<< HEAD
-                                            'format' => 'date',
-=======
                                             'format' => 'datetime',
->>>>>>> master
                                             'headerOptions' => [
                                                 'width' => 150,
->>>>>>> f32a99fed422638505da242bdcb777c28b6abc74
                                             ],
                                             [
                                                 'attribute' => 'title',
